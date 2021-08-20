@@ -1,9 +1,5 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-
-import MyMap from '../src/components/MyMap'
-import CardList from 'components/Card/list'
+import CardList from '@components/Card/list'
 
 export default function Home({reports}) {
   return (
@@ -18,7 +14,7 @@ export default function Home({reports}) {
       </Head>
 
         <h1 className="title">
-          Incidencias recientes
+          Alertas recientes
         </h1>
 
 {/*         <p className="description">

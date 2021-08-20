@@ -1,5 +1,13 @@
+
 {
-    "compilerOptions": {
-        "baseUrl": "src"
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@hooks/*": ["hooks/*"],
+      "@services/*": ["services/*"],
+      "@components/*": ["src/components/*"],
+      "@containers/*": ["src/containers/*"],
     }
+  },
+  "exclude": ["node_modules", ".next", "dist"]
 }

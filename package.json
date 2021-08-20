@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "jsw":"json-server --watch db.json --port 3001"
+    "jsw": "json-server --watch db.json --port 3001"
   },
   "dependencies": {
     "axios": "^0.21.1",

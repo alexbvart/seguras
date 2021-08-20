@@ -5,7 +5,7 @@ const Header = () => {
             <nav className="navbar navbar-dark bg-dark">
                 <div className="container-fluid">
                     <div className="container">
-                            <Link href="/a">
+                            <Link href="/">
                                 <a className="navbar-brand">
                                     Alertas
                                 </a>

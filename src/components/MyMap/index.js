@@ -2,7 +2,9 @@ import GoogleMapReact from 'google-map-react';
 const AnyReactComponent = ({ text }) => (
     <div className="d-flex flex-column align-items-center">
         <h6 children="fs-6 text text-mute font-monospace">{text}</h6>
-        <img className="m-0" src="assets/gps_icon.png" alt="gps icono" />
+        <img className="m-0" 
+            src="/assets/gps_icon.png" 
+            alt="gps icono" />
     </div>
 )
 const MyMap = () => {
@@ -24,7 +26,7 @@ const MyMap = () => {
                 <AnyReactComponent
                     lat={-7.2208812}
                     lng={-79.3958724}
-                    text="titulo"
+                    text="Ubicación"
                 />
             </GoogleMapReact>
         </div>
