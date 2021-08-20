@@ -5,13 +5,13 @@ const Header = () => {
             <nav className="navbar navbar-dark bg-dark">
                 <div className="container-fluid">
                     <div className="container">
-                            <Link href="/">
+                            <Link href="/report">
                                 <a className="navbar-brand">
                                     Alertas
                                 </a>
                             </Link>
-                            <Link href="/mapa">
-                                <a className="navbar-brand">Mapa</a>
+                            <Link href="/notification">
+                                <a className="navbar-brand">Notificaciones</a>
                             </Link>
                     </div>
                 </div>

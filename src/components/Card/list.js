@@ -43,9 +43,6 @@ const CardList = ({ data }) => {
                         </Card>
                     ))
                 }
-
-
-
             </div>
         </>
     );
