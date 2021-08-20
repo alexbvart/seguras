@@ -7,25 +7,22 @@ import { Container, Row, Col, Form, FloatingLabel, Button } from 'react-bootstra
 import Image from 'react-bootstrap/Image'
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
-const reports = ({ id, report }) => {
+const notification = ({ id, report,notification,police }) => {
 
     const { control, handleSubmit, register, formState: { errors } } = useForm();
     const onSubmit = async data =>{
         const sendData ={
-            "alertaId": id,
-            "intitucion_id": data.intitution,
-            "titulo": report.user.nombre,
-            "nivel": data.level,
-            "descripcion": data.description,
-            "colaborador_id": "1"
+            "notificacion_id": id,
+            "efectivo_id": data.police,
+            "estado": "atendido"
         }
-        const res = await post({src:"notification", data:sendData})
+        const res = await post({src:"asignacion", data:sendData})
         if(res.status===201){
-            swal("Datos registrados", "La notificación fue enviada", "success", {
+            swal("Datos registrados", "La asignación fue realizada", "success", {
                 button: "De acuerdo",
             });
         }else{
-            swal("Algo salio mal", "La notificación no fue enviada", "warning", {
+            swal("Algo salio mal", "La asignación no fue realizada", "warning", {
                 button: "De acuerdo",
             });
         }
@@ -33,13 +30,13 @@ const reports = ({ id, report }) => {
     return (
         <>
             <Head>
-                <title>Report {`${id}`}</title>
+                <title>Notificación {`${id}`}</title>
                 <meta name="description" content="Application monitoring platform secure" />
                 <link rel="icon" href="/favicon.ico" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
             <h1 className="title">
-                Alerta #{`${id}`}
+                Notificación #{`${id}`}
             </h1>
             <br />
             <Container >
@@ -48,8 +45,8 @@ const reports = ({ id, report }) => {
                         <article>
                             <h2>Registrada por:</h2>
                             <p>{report.user.nombre}</p>
-                            {/* <h2>Fecha y hora:</h2>
-                            <p>{report.user.nombre}</p> */}
+{/*                             <h2>Fecha y hora:</h2>
+                            <p>{report.user}</p> */}
                             <h2>Ubicación:</h2>
                             <p>{report.location}</p>
                         </article>
@@ -59,15 +56,15 @@ const reports = ({ id, report }) => {
                     </Col>
                 </Row>
                 <Row>
-                    <MyMap title={report.user.nombre}/>
+                    <MyMap  title={report.user.nombre} />
                 </Row>
             </Container>
             <br />
             <Container >
-                <h2>Informar a las autoridades</h2><br />
+                <h2>Informar a un oficial</h2><br />
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <Row className="" xs={1} md={3}>
-                        <Form.Group className="mb-3 col-md-12" controlId="formBasicEmail" as={Col}>
+                    <Row className="" xs={1} md={2}>
+                        <Form.Group className="mb-3 col-md-6" controlId="formBasicEmail" as={Col}>
                             <Form.Label
                                 {...register("description", { required: true })}
                             >Descripción de lo ocurrido</Form.Label>
@@ -85,33 +82,17 @@ const reports = ({ id, report }) => {
                                 {errors.description?.type === 'maxLength' && <span className="text-danger">El resumen debe contener mas de 10 caracteres.</span>}
                             </Form.Text>
                         </Form.Group>
+
                         <Form.Group className="mb-3 col-md-6" controlId="formBasicEmail" as={Col}>
-                            <Form.Label>Nivel de gravedad</Form.Label>
-                            <FloatingLabel controlId="floatingSelectGrid" label="Trabaja con selecciones">
-                                <select
-                                    className="form-select"
-                                    aria-label="valores de nivel de gravedad"
-                                    {...register("level", { required: true })}>
-                                    <option>Abre y seleciona un nivel </option>
-                                    <option value="1">Muy leve</option>
-                                    <option value="2">Leve</option>
-                                    <option value="3">Considerable</option>
-                                    <option value="4">Extremo</option>
-                                    <option value="5">Muy Extremo</option>
-                                </select>
-                            </FloatingLabel>
-                        </Form.Group>
-                        <Form.Group className="mb-3 col-md-6" controlId="formBasicEmail" as={Col}>
-                            <Form.Label>Notificar a una comiaria o intitución </Form.Label>
-                            <FloatingLabel controlId="floatingSelectGrid" label="Trabaja con selecciones">
-                                <Form.Select aria-label="Comisarias cercanas"
-                                    {...register("intitution", { required: true })}>
-                                    <option>Abre y seleciona una comisaria </option>
-                                    <option value="1">PNP Chepén</option>
-                                    <option value="2">PNP Guadalupe</option>
-                                    <option value="3">PNP San Jose</option>
-                                    <option value="4">PNP Pacasmayo</option>
-                                    <option value="5">PNP San Pedro de Lloc</option>
+                            <Form.Label>Notificar a un oficial de la institución </Form.Label>
+                            <FloatingLabel controlId="floatingSelectGrid" label="Abre y seleciona un oficial">
+                                <Form.Select aria-label="Oficiales"
+                                    {...register("police", { required: true })}>
+                                    {
+                                        police&&police.map(({id,fullname})=>(
+                                            <option value={id}>{fullname}</option>
+                                        ))
+                                    }
                                 </Form.Select>
                             </FloatingLabel>
                         </Form.Group>
@@ -124,20 +105,29 @@ const reports = ({ id, report }) => {
         </>
     );
 }
-export default reports;
+export default notification;
 export async function getServerSideProps(context) {
     const { params } = context;
     const { id } = params;
     /* const { query } = params; */
     const SERVER_HOST = process.env.NEXT_PUBLIC_API_PORT
 
-    const report = await fetch(`${SERVER_HOST}/reports/${id}`)
+    const notification = await fetch(`${SERVER_HOST}/notification/${id}`)
+        .then(res => res.json())
+
+    const {alertaId} = notification
+    const report = await fetch(`${SERVER_HOST}/reports/${alertaId}`)
+        .then(res => res.json())
+
+    const police = await fetch(`${SERVER_HOST}/efectivo`)
         .then(res => res.json())
 
     return {
         props: {
             report,
-            id
+            notification,
+            id,
+            police
         }
     };
 }

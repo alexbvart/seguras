@@ -1,59 +1,207 @@
 {
-    "reports": [
-        {
-            "id":1,
-            "user":"Julio Garcia Arrrlusea",
-            "location":"Manuel Seoane, Distrito de Víctor Larco Herrera 13009",
-            "src":"https://maps.app.goo.gl/LNbx6hNFp8UW8RHz8",
-            "date":"",
-            "time":"",
-            "multimedia":"https://e.an.amtv.pe/actualidad-79-victimas-feminicidio-tenia-hijo-su-agresor-n206775-1200x630-224442.jpg",
-            "lat":"-7.2208812",
-            "lng":"-79.3958724"
-        },
-        {
-            "id":2,
-            "user":"Maria Mariseli Bueno Abanto",
-            "location":"Huanchaco 13014",
-            "src":"https://maps.app.goo.gl/YCmv9kLn3hrsunWv5",
-            "date":"",
-            "time":"",
-            "multimedia":"https://www.nacion.com/resizer/MNQktCpKy3tkFWMhpqkZwOYZ5Eo=/600x0/center/middle/filters:quality(100)/cloudfront-us-east-1.images.arcpublishing.com/gruponacion/4ZBO64B4WZEXHJHUZSM3WF4UNA.jpg",
-            "lat":"-7.2208812",
-            "lng":"-79.3958724"
-        },
-        {
-            "id":3,
-            "user":"Andrea Babilonia Abanto Torres ",
-            "location":"El Milagro Distrito de Víctor Larco Herrera 13014",
-            "src":"https://maps.app.goo.gl/xi7LCiXambjnLAd77",
-            "date":"",
-            "time":"",
-            "multimedia":"https://media.ultimahora.com/p/797f909ba31daec84bce25a01b6f83fa/adjuntos/161/imagenes/008/013/0008013212/la-victima-pide-carcel-el-agresor.jpg",
-            "lat":"-7.2208812",
-            "lng":"-79.3958724"
-        },
-        {
-            "id":4,
-            "user":"Rosario Azucena Huaman Cabrera",
-            "location":"Manuel Seoane, Distrito de Víctor Larco Herrera 13009",
-            "src":"https://maps.app.goo.gl/LNbx6hNFp8UW8RHz8",
-            "date":"",
-            "time":"",
-            "multimedia":"http://www.diaadia.com.pa/sites/default/files/2018-01/violencia_domestica1.jpg",
-            "lat":"-7.2208812",
-            "lng":"-79.3958724"
-        },
-        {
-            "id":5,
-            "user":"Melina Nayhely Quiñones Mostacero",
-            "location":"A.h Ontere Giura San Pedro de Lloc 13800",
-            "src":"https://maps.app.goo.gl/MyUv9nBgp1Euq791A",
-            "date":"",
-            "time":"",
-            "multimedia":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPUto6Yqq6FRw7KAaBasNicTJxyA39lHb2Nc96GDpB-F_5EgRZdcr_fFJNYY7ASkAcNzQ&usqp=CAU",
-            "lat":"-7.2208812",
-            "lng":"-79.3958724"
-        }
-    ]
+  "reports": [
+    {
+      "id": 1,
+      "user": {
+        "nombre": "Julio Garcia Arrrlusea"
+      },
+      "location": "Manuel Seoane, Distrito de Víctor Larco Herrera 13009",
+      "src": "https://maps.app.goo.gl/LNbx6hNFp8UW8RHz8",
+      "date": "",
+      "time": "",
+      "multimedia": "https://e.an.amtv.pe/actualidad-79-victimas-feminicidio-tenia-hijo-su-agresor-n206775-1200x630-224442.jpg",
+      "lat": "-7.2208812",
+      "lng": "-79.3958724",
+      "estado": "aceptado"
+    },
+    {
+      "id": 2,
+      "user": {
+        "nombre": "Maria Mariseli Bueno Abanto"
+      },
+      "location": "Huanchaco 13014",
+      "src": "https://maps.app.goo.gl/YCmv9kLn3hrsunWv5",
+      "date": "",
+      "time": "",
+      "multimedia": "https://www.nacion.com/resizer/MNQktCpKy3tkFWMhpqkZwOYZ5Eo=/600x0/center/middle/filters:quality(100)/cloudfront-us-east-1.images.arcpublishing.com/gruponacion/4ZBO64B4WZEXHJHUZSM3WF4UNA.jpg",
+      "lat": "-7.2208812",
+      "lng": "-79.3958724",
+      "estado": "aceptado"
+    },
+    {
+      "id": 3,
+      "user": {
+        "nombre": "Andrea Babilonia Abanto Torres "
+      },
+      "location": "El Milagro Distrito de Víctor Larco Herrera 13014",
+      "src": "https://maps.app.goo.gl/xi7LCiXambjnLAd77",
+      "date": "",
+      "time": "",
+      "multimedia": "https://media.ultimahora.com/p/797f909ba31daec84bce25a01b6f83fa/adjuntos/161/imagenes/008/013/0008013212/la-victima-pide-carcel-el-agresor.jpg",
+      "lat": "-7.2208812",
+      "lng": "-79.3958724",
+      "estado": "aceptado"
+    },
+    {
+      "id": 4,
+      "user": {
+        "nombre": "Rosario Azucena Huaman Cabrera"
+      },
+      "location": "Manuel Seoane, Distrito de Víctor Larco Herrera 13009",
+      "src": "https://maps.app.goo.gl/LNbx6hNFp8UW8RHz8",
+      "date": "",
+      "time": "",
+      "multimedia": "http://www.diaadia.com.pa/sites/default/files/2018-01/violencia_domestica1.jpg",
+      "lat": "-7.2208812",
+      "lng": "-79.3958724",
+      "estado": "aceptado"
+    },
+    {
+      "id": 5,
+      "user": {
+        "nombre": "Melina Nayhely Quiñones Mostacero"
+      },
+      "location": "A.h Ontere Giura San Pedro de Lloc 13800",
+      "src": "https://maps.app.goo.gl/MyUv9nBgp1Euq791A",
+      "date": "",
+      "time": "",
+      "multimedia": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPUto6Yqq6FRw7KAaBasNicTJxyA39lHb2Nc96GDpB-F_5EgRZdcr_fFJNYY7ASkAcNzQ&usqp=CAU",
+      "lat": "-7.2208812",
+      "lng": "-79.3958724",
+      "estado": "aceptado"
+    }
+  ],
+  "notification": [
+    {
+      "alertaId": "3",
+      "intitucion_id": "3",
+      "titulo": "Andrea Babilonia Abanto Torres ",
+      "nivel": "4",
+      "descripcion": "Andrea Babilonia Abanto Torres  reporto una incidencia en El Milagro Distrito de Víctor Larco Herrera 13014",
+      "colaborador_id": "1",
+      "id": 1
+    },
+    {
+      "alertaId": "4",
+      "intitucion_id": "4",
+      "titulo": "Rosario Azucena Huaman Cabrera",
+      "nivel": "2",
+      "descripcion": "Rosario Azucena Huaman Cabrera reporto una incidencia en Manuel Seoane, Distrito de Víctor Larco Herrera 13009",
+      "colaborador_id": "1",
+      "id": 2
+    },
+    {
+      "alertaId": "2",
+      "intitucion_id": "4",
+      "titulo": "Maria Mariseli Bueno Abanto",
+      "nivel": "4",
+      "descripcion": "Maria Mariseli Bueno Abanto reporto una incidencia en Huanchaco 13014",
+      "colaborador_id": "1",
+      "id": 3
+    },
+    {
+      "alertaId": "5",
+      "intitucion_id": "5",
+      "titulo": "Melina Nayhely Quiñones Mostacero",
+      "nivel": "3",
+      "descripcion": "Melina Nayhely Quiñones Mostacero reporto una incidencia en A.h Ontere Giura San Pedro de Lloc 13800",
+      "colaborador_id": "1",
+      "id": 4
+    },
+    {
+      "alertaId": "2",
+      "intitucion_id": "1",
+      "titulo": "Maria Mariseli Bueno Abanto",
+      "nivel": "4",
+      "descripcion": "Maria Mariseli Bueno Abanto reporto una incidencia en Huanchaco 13014 ",
+      "colaborador_id": "1",
+      "id": 5
+    }
+  ],
+  "asignacion": [
+    {
+      "notificacion_id": "1",
+      "efectivo_id": "9",
+      "estado": "atendido",
+      "id": 1
+    },
+    {
+      "notificacion_id": "2",
+      "efectivo_id": "9",
+      "estado": "atendido",
+      "id": 2
+    }
+  ],
+  "efectivo": [
+    {
+      "dni": "73693053",
+      "fullname": "FLOR ANALY PURIHUAMAN REYES",
+      "telephone": "973693053",
+      "id": 7
+    },
+    {
+      "dni": "74693053",
+      "fullname": "BETSY RUBI DIAZ QUISPESIVANA",
+      "telephone": "974693053",
+      "id": 8
+    },
+    {
+      "dni": "77693053",
+      "fullname": "JOSE JUNIOR ESPINOZA CABEL",
+      "telephone": "977693053",
+      "id": 9
+    },
+    {
+      "dni": "73693059",
+      "fullname": "CRISTHIAN RICARDO CHANTA SANTOS",
+      "telephone": "973693059",
+      "id": 10
+    },
+    {
+      "dni": "73693051",
+      "fullname": "EDERSON ELIEL CONTRERAS VENTURA",
+      "telephone": "973693051",
+      "id": 12
+    },
+    {
+      "dni": "73693052",
+      "fullname": "YENEFFER CARIN DE LA CRUZ MENDOZA",
+      "telephone": "973693052",
+      "id": 13
+    },
+    {
+      "dni": "73693054",
+      "fullname": "WILMER PURIHUAMAN REYES",
+      "telephone": "973693054",
+      "id": 15
+    },
+    {
+      "dni": "73693057",
+      "fullname": "JOSEFA SOLANYI HUAMAN CHINGUEL",
+      "telephone": "973693057",
+      "id": 16
+    }
+  ],
+  "roles": [
+    {
+      "id": 1,
+      "nombre": "admin",
+      "descripction": "todos los permisos"
+    },
+    {
+      "id": 2,
+      "nombre": "user-t1",
+      "descripction": "usuario aplicativo mobil"
+    },
+    {
+      "id": 3,
+      "nombre": "user-t2",
+      "descripction": "usuario monitoreo"
+    },
+    {
+      "id": 4,
+      "nombre": "user-ii",
+      "descripction": "usuario institucion"
+    }
+  ]
 }

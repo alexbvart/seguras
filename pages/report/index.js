@@ -1,13 +1,13 @@
 import Head from 'next/head'
 import CardList from '@components/Card/list'
 
-export default function Home({reports}) {
+export default function Report({reports}) {
   return (
     <>
 
  
       <Head>
-        <title>Secure</title>
+        <title>Seguras | Reportes</title>
         <meta name="description" content="Application monitoring platform secure" />
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

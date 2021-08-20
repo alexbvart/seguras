@@ -7,4 +7,14 @@ module.exports = {
         ],
         imageSizes: [64, 96, 128,236, 256, 384],
     },
+
 }
+
+/*     async rewrites () {
+        return[
+            {
+                source:"/:path*",
+                destination:"/report/:path*"
+            }
+        ]
+    } */
