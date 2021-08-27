@@ -18,7 +18,7 @@ export default function Notification({notifications}) {
 {/*         <p className="description">
           Get started by editing{' '}
         </p> */}
-
+        
         <CardList data={notifications} />
     </>
   )

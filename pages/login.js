@@ -3,16 +3,17 @@ import Head from 'next/head'
 import { Button, Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
+import post from '@services/post';
 
 
 const Login = () => {
     const { control, handleSubmit, register, formState: { errors } } = useForm();
     const onSubmit = async data =>{
         const sendData ={
-            "password": data.data,
+            "password": data.password,
             "email": data.email,
         }
-        const res = await post({src:"notification", data:sendData})
+        const res = await post({src:"login", data:sendData})
         if(res.status===201){
             swal("Datos registrados", "La notificación fue enviada", "success", {
                 button: "De acuerdo",
@@ -33,7 +34,6 @@ const Login = () => {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
 
-    
             <h1 className="title">
                 Inicio de sesión
             </h1>
@@ -67,13 +67,12 @@ const Login = () => {
                                     type="password" 
                                     placeholder="" 
                                     {...register("password")} 
-                                    defaultValue={``}
                                 />
                             </FloatingLabel>
                             <Form.Text className="text-muted">
-                                {!errors.email && <>Escriba su contraseña</>}
-                                {errors.email?.type === 'required' && <span className="text-danger">El correo es obligatorio</span>}
-                                {errors.email?.type === 'maxLength' && <span className="text-danger">El correo es obligatorio debe contener mas de 10 caracteres.</span>}
+                                {!errors.password && <>Escriba su contraseña</>}
+                                {errors.password?.type === 'required' && <span className="text-danger">El correo es obligatorio</span>}
+                                {errors.password?.type === 'maxLength' && <span className="text-danger">El correo es obligatorio debe contener mas de 10 caracteres.</span>}
                             </Form.Text>
                         </Form.Group>
                     </Row>

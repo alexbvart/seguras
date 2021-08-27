@@ -4,8 +4,12 @@ import styles from './card.module.css'
 import userRepository from 'repository/user';
 
 import { useRouter } from 'next/router'
+import SearchBar from '@components/SearchBar/SearchBar';
 
 const CardList = ({ data }) => {
+
+    const [keywordFilter, setKeywordFilter] = useState('')
+
     const role = "user-ii"
     const [linkurl, setLinkurl] = useState("report")
     const router = useRouter()
@@ -22,15 +26,22 @@ const CardList = ({ data }) => {
         }
     }, [])
 
-    
-    console.log(router);
+    const handleOnSubmit = (keyword) =>{
+        setKeywordFilter(keyword)
+        console.log("padre", keyword)
+    }
+/*     
+    console.log(router); */
 
     const redirectionurl= router.asPath
     return (
         <>
+            <SearchBar handleOnSubmit={handleOnSubmit}/>
             <div className={styles.grid}>
-                {data &&
-                    data.map((card, index) => (
+                {(data && data.length > 0) &&
+                    data
+                    .filter(item => String(item.descripcion).toUpperCase().includes(keywordFilter.toUpperCase()) || String(item.user?.nombre).toUpperCase().includes(keywordFilter.toUpperCase()))
+                    .map((card, index) => (
                         <Card
                             key={card.id}
                             src={`${redirectionurl}/${card.id}`}
