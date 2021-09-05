@@ -4,7 +4,6 @@ import CardList from '@components/Card/list'
 export default function Report({reports}) {
   return (
     <>
-
  
       <Head>
         <title>Seguras | Reportes</title>
@@ -28,13 +27,9 @@ export default function Report({reports}) {
 
 export async function getServerSideProps(context) {
   const { params } = context;
-
-  /* const { query } = params; */
   const SERVER_HOST = process.env.NEXT_PUBLIC_API_PORT
-
-  const reports = await fetch(`${SERVER_HOST}/reports/`)
+  const reports = await fetch(`${SERVER_HOST}/reports`)
   .then(res => res.json())
-
   return {
       props: {
         reports
