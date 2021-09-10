@@ -16,11 +16,12 @@ const TYPES_HEADER = {
     "user-t3": <HeaderInstitution />
 }
 
-const Header = ({ roles = "user-t2" }) => {
+const Header = () => {
     const usera = useSession();
-    const { user, setUser, getUser } = useContext(SessionContext)
+    const { user, setUser, getUser, role, getUserRole } = useContext(SessionContext)
     useEffect(() => {
         getUser()
+        getUserRole()
     }, [])
     const existSesion = () => {
         setUser(null)
@@ -32,7 +33,7 @@ const Header = ({ roles = "user-t2" }) => {
             <Navbar sticky="top" expand="lg" className={header} >
                 <Container >
                     <header className={headerspaces}>
-                        {TYPES_HEADER[roles]}
+                        {TYPES_HEADER[role]}
                         <Nav className="justify-content-end">
                             <Navbar.Text>
                                 {user ?
