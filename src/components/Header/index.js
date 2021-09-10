@@ -1,5 +1,8 @@
 import useSession from '@hooks/useSesion';
+import logout from '@services/logout';
+import SessionContext from 'context/session/SessionContext';
 import Link from 'next/link'
+import { useContext, useEffect } from 'react';
 
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import HeaderAdmin from './admin'
@@ -14,7 +17,16 @@ const TYPES_HEADER = {
 }
 
 const Header = ({ roles = "admin" }) => {
-    const user = useSession();
+    const usera = useSession();
+    const { user, setUser, getUser } = useContext(SessionContext)
+    useEffect(() => {
+        getUser()
+    }, [])
+    const existSesion = () => {
+        setUser(null)
+        logout()
+    }
+
     return (
         <>
             <Navbar sticky="top" expand="lg" className={header} >
@@ -26,8 +38,8 @@ const Header = ({ roles = "admin" }) => {
                                 {user ?
                                     <NavDropdown title={user.username} id="nav-dropdown">
                                         <NavDropdown.Item>
-                                            <Link href="/">
-                                                <a>Cerrar sesión</a>
+                                            <Link href="/login">
+                                                <a><div onClick={() => existSesion()}>Cerrar sesión</div></a>
                                             </Link>
                                         </NavDropdown.Item>
                                     </NavDropdown>

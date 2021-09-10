@@ -4,6 +4,7 @@
     "baseUrl": ".",
     "paths": {
       "@hooks/*": ["hooks/*"],
+      "@context/*": ["context/*"],
       "@services/*": ["services/*"],
       "@components/*": ["src/components/*"],
       "@containers/*": ["src/containers/*"],

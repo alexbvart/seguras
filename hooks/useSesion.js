@@ -1,21 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
-
+import SessionContext from 'context/session/SessionContext';
 
 const useSession = () => {
   const router = useRouter()
-  const [user, setUser] = useState(false)
+  const {user, setUser, getUser} = useContext(SessionContext)
 
   useEffect(() => {
     if (localStorage.getItem("@token") == null){
       router.push("login")
     }
-    if (localStorage.getItem("@usuario") !== null){
-      setUser(JSON.parse(localStorage.getItem("@usuario")))
-    }else{
-      setUser(false)
-    }
+    getUser()
   }, [])
   return user
 }
