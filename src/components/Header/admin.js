@@ -2,7 +2,7 @@ import Link from 'next/link'
 const HeaderAdmin = () => {
     return (
         <>
-            <nav className="navbar navbar-dark bg-dark">
+            <nav className="navbar navbar-dark bg-primary">
                 <div className="container-fluid">
                     <div className="container">
                             <Link href="/report">

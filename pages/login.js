@@ -58,7 +58,7 @@ const Login = () => {
                     <Row className="" xs={1}>
                         <Form.Group className="mb-3 col-md-12" controlId="formBasicEmail" as={Col}>
                             <Form.Label>Correo Electronico</Form.Label>
-                            <FloatingLabel controlId="floatingInputGrid" label="Escriba su correo electronico">
+                            <FloatingLabel controlId="floatingInputGriduser" label="Escriba su correo electronico">
                                 <Form.Control
                                     type="text"
                                     placeholder="Escriba su coreo"
@@ -75,7 +75,7 @@ const Login = () => {
 
                         <Form.Group className="mb-3 col-md-12" controlId="formBasicEmail" as={Col}>
                             <Form.Label>Contraseña</Form.Label>
-                            <FloatingLabel controlId="floatingInputGrid" label="Escribe su contraseña">
+                            <FloatingLabel controlId="floatingInputGridpassword" label="Escribe su contraseña">
                                 <Form.Control
                                     type="password"
                                     placeholder=""

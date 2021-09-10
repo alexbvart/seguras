@@ -1,6 +1,6 @@
 import useSession from '@hooks/useSesion';
 import React, {Children, useState} from 'react';
-import Header from '../../components/Header/admin';
+import Header from '../../components/Header/';
 import {layout,main} from './layout.module.css'
 
 const Layout = ({children}) => {
