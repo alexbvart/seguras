@@ -30,8 +30,6 @@ const CardList = ({ data }) => {
         setKeywordFilter(keyword)
         console.log("padre", keyword)
     }
-/*     
-    console.log(router); */
 
     const redirectionurl= router.asPath
     return (

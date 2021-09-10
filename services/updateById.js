@@ -1,7 +1,9 @@
 import axios from 'axios';
+import axiosinterceptor from './axiosinterceptor';
 
-const updateById = async (src,id,up) => {
-    const response = await axios.patch(`${src}/${id}`,up)
+const updateById = async ({src,id,updata}) => {
+    await axiosinterceptorr()
+    const response = await axios.patch(`${src}/${id}`,updata)
     return response
 }
 export default updateById;

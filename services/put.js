@@ -1,7 +1,9 @@
 import axios from 'axios';
+import axiosinterceptor from './axiosinterceptor';
 
-const put = async (src,id,pup) => {
-    const response = await axios.put(`${src}/${id}`,pup)
+const put = async ({src,id,pupdata}) => {
+    await axiosinterceptor()
+    const response = await axios.put(`${src}/${id}`,pupdata)
     return response
 }
 export default put;

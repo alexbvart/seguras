@@ -1,7 +1,9 @@
 import axios from 'axios';
+import axiosinterceptor from './axiosinterceptor';
 
 const getAll = async ({src}) => {
-    const API_URL = process.env.NEXT_PUBLIC_API_PORT
+    await axiosinterceptor()
+    const API_URL = process.env.NEXT_PUBLIC_API_AWS
     const getAllData = await axios.get(`${API_URL}/${src}`)
 
     return getAllData.data;

@@ -1,22 +1,13 @@
-import Link from 'next/link'
-const Header = () => {
-    return (
-        <>
-            <nav className="navbar navbar-dark bg-dark">
-                <div className="container-fluid">
-                    <div className="container">
-                            <Link href="/report">
-                                <a className="navbar-brand">
-                                    Alertas
-                                </a>
-                            </Link>
-                            <Link href="/notification">
-                                <a className="navbar-brand">Notificaciones</a>
-                            </Link>
-                    </div>
-                </div>
-            </nav>
-        </>
-    );
+import React, {useState} from 'react';
+import HeaderAdmin from './admin'
+
+const TYPES_HEADER = {
+    "admin":   <HeaderAdmin />,
+    "user-t2": <HeaderControl />,
+    "user-t3": <HeaderInstitution />
+}
+
+const Header = ({roles="admin"}) => {
+    return TYPES_HEADER[roles];
 }
 export default Header;

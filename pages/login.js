@@ -3,28 +3,41 @@ import Head from 'next/head'
 import { Button, Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
-import post from '@services/post';
+import { postLogin } from '@services/post';
+import { useRouter } from 'next/router';
 
 
 const Login = () => {
+    const router = useRouter()
     const { control, handleSubmit, register, formState: { errors } } = useForm();
-    const onSubmit = async data =>{
-        const sendData ={
+    const onSubmit = async data => {
+        const sendData = {
             "password": data.password,
-            "email": data.email,
+            "username": data.email,
         }
-        const res = await post({src:"login", data:sendData})
-        if(res.status===201){
-            swal("Datos registrados", "La notificación fue enviada", "success", {
-                button: "De acuerdo",
-            });
-        }else{
-            swal("Algo salio mal", "La notificación no fue enviada", "warning", {
-                button: "De acuerdo",
-            });
+        const res = await postLogin({ src: "login", data: sendData })
+        if (res.code === "OK") {
+            await localStorage.setItem("@token", res.token)
+            await localStorage.setItem("@usuario", JSON.stringify(res.usuario))
+            let role = res.usuario.roles[0]
+            if (role.nombre === "user-t2")
+                router.push("/monitor")
+            if (role.nombre === "user-t3")
+                router.push("/notification")
+            if (role.nombre === "admin")
+                router.push("/")
+        } else {
+            if (res.code === "ERROR") {
+                swal("Mensaje", res.message, "Error", {
+                    button: "De acuerdo",
+                });
+            } else {
+                swal("Algo salio mal", "La notificación no fue enviada", "warning", {
+                    button: "De acuerdo",
+                });
+            }
         }
-    } 
-
+    }
     return (
         <>
             <Head>
@@ -38,7 +51,7 @@ const Login = () => {
                 Inicio de sesión
             </h1>
             <br />
-    
+
             <Container >
                 <h2>Introduzca sus datos</h2><br />
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -46,11 +59,11 @@ const Login = () => {
                         <Form.Group className="mb-3 col-md-12" controlId="formBasicEmail" as={Col}>
                             <Form.Label>Correo Electronico</Form.Label>
                             <FloatingLabel controlId="floatingInputGrid" label="Escriba su correo electronico">
-                                <Form.Control 
-                                    type="email" 
-                                    placeholder="Escriba su coreo" 
-                                    {...register("email")} 
-                                    defaultValue={`@gmail.com`}
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Escriba su coreo"
+                                    {...register("email")}
+                                    defaultValue={``}
                                 />
                             </FloatingLabel>
                             <Form.Text className="text-muted">
@@ -63,10 +76,10 @@ const Login = () => {
                         <Form.Group className="mb-3 col-md-12" controlId="formBasicEmail" as={Col}>
                             <Form.Label>Contraseña</Form.Label>
                             <FloatingLabel controlId="floatingInputGrid" label="Escribe su contraseña">
-                                <Form.Control 
-                                    type="password" 
-                                    placeholder="" 
-                                    {...register("password")} 
+                                <Form.Control
+                                    type="password"
+                                    placeholder=""
+                                    {...register("password")}
                                 />
                             </FloatingLabel>
                             <Form.Text className="text-muted">

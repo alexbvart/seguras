@@ -1,7 +1,6 @@
-/* import getAll from "@services/getAll";
+import getAll from "@services/getAll";
 
 const userRepository = async () => {
-    const res = await getAll({ src: "roles" })
     const user = {
         "admin": {
             "id": 1,
@@ -28,4 +27,4 @@ const userRepository = async () => {
     }
     return user
 }
-export default userRepository; */
+export default userRepository
