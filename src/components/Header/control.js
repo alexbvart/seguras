@@ -9,7 +9,7 @@ const HeaderControl = () => {
                 <Nav.Item>
                     <Nav.Link eventKey="1" href="#/home">
                         <Link href="/notification">
-                            <a>Notificationes</a>
+                            <a>Alertas</a>
                         </Link>
                     </Nav.Link>
                 </Nav.Item>
@@ -23,13 +23,13 @@ const HeaderControl = () => {
                         NavLink 3 content
                     </Nav.Link>
                 </Nav.Item> */}
-                <NavDropdown title="Personal de policia" id="nav-dropdown">
+                <NavDropdown title="Personal de monitoreo" id="nav-dropdown">
                     <NavDropdown.Item eventKey="4.1">
-                        <Link href="/police/NEW">
+                        <Link href="/monitor/new">
                             <a>Registrar</a>
                         </Link>
                     </NavDropdown.Item>
-                    <NavDropdown.Item eventKey="4.2"><Link href="/police">
+                    <NavDropdown.Item eventKey="4.2"><Link href="/monitor">
                         <a>Listar</a>
                     </Link></NavDropdown.Item>
                     {/* <NavDropdown.Item eventKey="4.3">Something else here</NavDropdown.Item>

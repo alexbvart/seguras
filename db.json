@@ -182,6 +182,56 @@
       "id": 16
     }
   ],
+  "monitor": [
+    {
+      "dni": "73693053",
+      "fullname": "FLOR ANALY PURIHUAMAN REYES",
+      "telephone": "973693053",
+      "id": 7
+    },
+    {
+      "dni": "74693053",
+      "fullname": "BETSY RUBI DIAZ QUISPESIVANA",
+      "telephone": "974693053",
+      "id": 8
+    },
+    {
+      "dni": "77693053",
+      "fullname": "JOSE JUNIOR ESPINOZA CABEL",
+      "telephone": "977693053",
+      "id": 9
+    },
+    {
+      "dni": "73693059",
+      "fullname": "CRISTHIAN RICARDO CHANTA SANTOS",
+      "telephone": "973693059",
+      "id": 10
+    },
+    {
+      "dni": "73693051",
+      "fullname": "EDERSON ELIEL CONTRERAS VENTURA",
+      "telephone": "973693051",
+      "id": 12
+    },
+    {
+      "dni": "73693052",
+      "fullname": "YENEFFER CARIN DE LA CRUZ MENDOZA",
+      "telephone": "973693052",
+      "id": 13
+    },
+    {
+      "dni": "73693054",
+      "fullname": "WILMER PURIHUAMAN REYES",
+      "telephone": "973693054",
+      "id": 15
+    },
+    {
+      "dni": "73693057",
+      "fullname": "JOSEFA SOLANYI HUAMAN CHINGUEL",
+      "telephone": "973693057",
+      "id": 16
+    }
+  ],
   "roles": [
     {
       "id": 1,

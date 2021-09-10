@@ -16,7 +16,7 @@ const TYPES_HEADER = {
     "user-t3": <HeaderInstitution />
 }
 
-const Header = ({ roles = "admin" }) => {
+const Header = ({ roles = "user-t2" }) => {
     const usera = useSession();
     const { user, setUser, getUser } = useContext(SessionContext)
     useEffect(() => {
