@@ -5,7 +5,6 @@ export default function Home({reports}) {
   return (
     <>
 
- 
       <Head>
         <title>Secure</title>
         <meta name="description" content="Application monitoring platform secure" />
