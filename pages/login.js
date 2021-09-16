@@ -12,7 +12,7 @@ const Login = () => {
     const router = useRouter()
     const { control, handleSubmit, register, formState: { errors } } = useForm();
     const onSubmit = async data => {
-        const sendData = loginUserHelper({"data":data})
+        const sendData = loginUserHelper({ "data": data })
         const res = await login({ src: "login", data: sendData })
         if (res.code === "OK") {
             await localStorage.setItem("@token", res.token)
@@ -25,15 +25,9 @@ const Login = () => {
             if (role.nombre === "admin")
                 router.push("/")
         } else {
-            if (res.code === "ERROR") {
-                swal("Mensaje", res.message, "Error", {
-                    button: "De acuerdo",
-                });
-            } else {
-                swal("Algo salio mal", "La notificación no fue enviada", "warning", {
-                    button: "De acuerdo",
-                });
-            }
+            swal("Mensaje", res.message, "error", {
+                button: "De acuerdo",
+            });
         }
     }
     return (
@@ -60,7 +54,7 @@ const Login = () => {
                                 <Form.Control
                                     type="text"
                                     placeholder="Escriba su nombre de usuario"
-                                    {...register("username")}
+                                    {...register("username", { required: true })}
                                     defaultValue={``}
                                 />
                             </FloatingLabel>
@@ -77,7 +71,7 @@ const Login = () => {
                                 <Form.Control
                                     type="password"
                                     placeholder=""
-                                    {...register("password")}
+                                    {...register("password", { required: true })}
                                 />
                             </FloatingLabel>
                             <Form.Text className="text-muted">

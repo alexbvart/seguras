@@ -4,7 +4,6 @@ import  post  from '@module/post';
 /* https://github.com/User0608/mujeresapi/blob/master/docs/PERSONA.md */
 export const createPerson = async({data}) =>{
     const sendData = createPersonHelper({ "data": data })
-    const res = await post({ src: "persona ", data: sendData })
-    console.log(res)
+    const res = await post({ src: "persona", data: sendData })
     return res
 }

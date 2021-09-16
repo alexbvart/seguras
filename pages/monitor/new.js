@@ -8,30 +8,26 @@ import { createUser } from '@service/UserServices';
 import { createCollaborator } from '@service/CollaboratorServices';
 
 const Monitor = () => {
-    const [personCurrent, setPersonCurrent] = useState(null)
-    const [userCurrent, setUserCurrent] = useState(null)
-    const { control, handleSubmit, register, formState: { errors } } = useForm();
-    const onSubmitPerson = async data => {
-        swal("Datos registrados", "La notificación fue enviada", "success", {
-            button: "De acuerdo",
-        });
-        setPersonCurrent(data)
-    }
-    const onSubmitUser = async data => {
-        setUserCurrent(data)
-        await enterData()
-    }
-    const enterData = async ()=>{
-        const resPerson       = await createPerson({ "data": personCurrent });
-        const resUser         = await createUser({ "data": userCurrent });
-        const resCollaborator = await createCollaborator({ persona_id: resPerson.data.id, usuario_id: resUser.data.id })
 
-        if (resCollaborator.status === 201) {
-            swal("Datos registrados", "La notificación fue enviada", "success", {
+    const { control, handleSubmit, register, formState: { errors } } = useForm();
+    const onSubmitPerson = async (dataPerson) => {
+    }
+    const onSubmitUser = async (dataUser,e) => {
+        await enterData(dataUser)
+        await e.target.reset(); // reset after form submit
+    }
+    const enterData = async (data)=>{
+
+        const resPerson       = await createPerson({ "data": data });
+        const resUser         = await createUser({ "data": data });
+        console.log({ persona_id: resPerson.data.data.id, usuario_id: resUser.data.data.usuario_id})
+        const resCollaborator = await createCollaborator({ persona_id: resPerson.data.data.id, usuario_id: resUser.data.data.usuario_id })
+        if (resCollaborator.status === 200) {
+            swal("Datos registrados", "El personal de monitoreo fue registrado", "success", {
                 button: "De acuerdo",
             });
         } else {
-            swal("Algo salio mal", "La notificación no fue enviada", "warning", {
+            swal("Algo salio mal", "El personal de monitoreo no fue registrado", "warning", {
                 button: "De acuerdo",
             });
         }
@@ -183,7 +179,7 @@ const Monitor = () => {
                                         <Form.Control
                                             type="text"
                                             placeholder=""
-                                            {...register("referencia", { required: true })}
+                                            {...register("referencia")}
                                         />
                                     </FloatingLabel>
                                     <Form.Text className="text-muted">
@@ -193,9 +189,9 @@ const Monitor = () => {
                                     </Form.Text>
                                 </Form.Group>
                             </Row>
-                            <Button variant="primary" type="submit">
+                            {/* <Button variant="primary" type="submit">
                                 Continuar con los datos de usuario
-                            </Button>
+                            </Button> */}
                         </form>
                     </Tab>
                     <Tab eventKey="user" title="Datos de usuario">
@@ -203,19 +199,19 @@ const Monitor = () => {
                         <form onSubmit={handleSubmit(onSubmitUser)}>
                             <Row className="" xs={1}>
                                 <Form.Group className="mb-3 col-md-12" controlId="formBasicusername" as={Col}>
-                                    <Form.Label>Correo Electronico</Form.Label>
+                                    <Form.Label>Nombre de usuario</Form.Label>
                                     <FloatingLabel controlId="Correo" label="Escriba su correo electronico">
                                         <Form.Control
                                             type="text"
                                             placeholder="Escriba su nombre de usuario"
-                                            {...register("username")}
+                                            {...register("username", { required: true , minLength: 10})}
                                             defaultValue={``}
                                         />
                                     </FloatingLabel>
                                     <Form.Text className="text-muted">
                                         {!errors.username && <>Escriba su correo</>}
-                                        {errors.username?.type === 'required' && <span className="text-danger">El correo es obligatorio</span>}
-                                        {errors.username?.type === 'maxLength' && <span className="text-danger">El correo es obligatorio debe contener mas de 10 caracteres.</span>}
+                                        {errors.username?.type === 'required' && <span className="text-danger">El Nombre de usuario es obligatorio</span>}
+                                        {errors.username?.type === 'minLength' && <span className="text-danger">El Nombre de usuario es obligatorio debe contener mas de 8 caracteres.</span>}
                                     </Form.Text>
                                 </Form.Group>
 
@@ -225,13 +221,13 @@ const Monitor = () => {
                                         <Form.Control
                                             type="password"
                                             placeholder=""
-                                            {...register("password")}
+                                            {...register("password", { required: true , minLength:108})}
                                         />
                                     </FloatingLabel>
                                     <Form.Text className="text-muted">
                                         {!errors.password && <>Escriba su contraseña</>}
-                                        {errors.password?.type === 'required' && <span className="text-danger">El correo es obligatorio</span>}
-                                        {errors.password?.type === 'maxLength' && <span className="text-danger">El correo es obligatorio debe contener mas de 10 caracteres.</span>}
+                                        {errors.password?.type === 'required' && <span className="text-danger">El contraseña es obligatorio</span>}
+                                        {errors.password?.type === 'minLength' && <span className="text-danger">El contraseña es obligatorio debe contener mas de 8 caracteres.</span>}
                                     </Form.Text>
                                 </Form.Group>
                             </Row>

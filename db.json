@@ -291,31 +291,12 @@
     }
   ],
   "persona": [
-    {
-      "nombre": "ALEX",
-      "apellido_paterno": "BRIONES",
-      "apellido_materno": "Rodriguez",
-      "telefono": "972001932",
-      "dni": "71602394",
-      "direccion": {
-        "provincia": "TRUJILLO",
-        "distrito": "PACASMAYO",
-        "direccion": "UNT",
-        "referencia": "CERCA A LA PLAZUELA DEL NIÑO"
-      },
-      "id": 1
-    }
+  
   ],
   "colaborador": [
-    {
-      "persona_id": 1,
-      "usuario_id": 1,
-      "id": 1
-    }
+  
   ],
   "usuario": [
-    {
-      "id": 1
-    }
+
   ]
 }

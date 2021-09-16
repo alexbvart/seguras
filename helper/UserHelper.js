@@ -9,8 +9,10 @@ export const loginUserHelper = ({ data }) => {
 }
 export const createUserHelper = ({ data }) => {
     if (data) {
-        const { username, password } = data;
-        const dataSend = { username, password }
+        const dataSend = { 
+            "username":data.username, 
+            "password":data.password 
+        }
         return dataSend
     } else {
         return undefined
