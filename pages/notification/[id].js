@@ -1,5 +1,5 @@
 import MyMap from '@components/MyMap';
-import post from '@services/post';
+import post from 'module/post';
 
 import Head from 'next/head';
 import React from 'react';

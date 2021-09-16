@@ -4,8 +4,10 @@
     "baseUrl": ".",
     "paths": {
       "@hooks/*": ["hooks/*"],
+      "@helper/*": ["helper/*"],
       "@context/*": ["context/*"],
-      "@services/*": ["services/*"],
+      "@module/*": ["module/*"],
+      "@service/*": ["service/*"],
       "@components/*": ["src/components/*"],
       "@containers/*": ["src/containers/*"],
     }

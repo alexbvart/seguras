@@ -1,21 +1,44 @@
 import Link from 'next/link'
+import { Nav, NavDropdown } from 'react-bootstrap';
+
 const HeaderAdmin = () => {
+    const handleSelect = (eventKey) => {};
+
     return (
         <>
-            <nav className="navbar navbar-dark bg-primary">
-                <div className="container-fluid">
-                    <div className="container">
-                            <Link href="/report">
-                                <a className="navbar-brand">
-                                    Alertas
-                                </a>
-                            </Link>
-                            <Link href="/notification">
-                                <a className="navbar-brand">Notificaciones</a>
-                            </Link>
-                    </div>
-                </div>
-            </nav>
+                        <Nav activeKey="1" onSelect={handleSelect}>
+                <Nav.Item>
+                    <Nav.Link eventKey="1" href="#/home">
+                        <Link href="/notification">
+                            <a>Alertas</a>
+                        </Link>
+                    </Nav.Link>
+                </Nav.Item>
+                {/*                 <Nav.Item>
+                    <Nav.Link eventKey="2" title="Item">
+                        NavLink 2 content
+                    </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link eventKey="3" disabled>
+                        NavLink 3 content
+                    </Nav.Link>
+                </Nav.Item> */}
+                <NavDropdown title="Personal de monitoreo" id="nav-dropdown">
+                    <NavDropdown.Item eventKey="4.1">
+                        <Link href="/monitor/new">
+                            <a>Registrar</a>
+                        </Link>
+                    </NavDropdown.Item>
+                    <NavDropdown.Item eventKey="4.2"><Link href="/monitor">
+                        <a>Listar</a>
+                    </Link></NavDropdown.Item>
+                    {/* <NavDropdown.Item eventKey="4.3">Something else here</NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item eventKey="4.4">Separated link</NavDropdown.Item>*/}
+                </NavDropdown>
+
+            </Nav>
         </>
     );
 }

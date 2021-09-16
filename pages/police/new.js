@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { Button, Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
-import post from '@services/post';
+import post from 'module/post';
 
 
 const Police = () => {

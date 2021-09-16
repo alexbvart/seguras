@@ -3,19 +3,17 @@ import Head from 'next/head'
 import { Button, Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
-import { postLogin } from '@services/post';
 import { useRouter } from 'next/router';
+import { loginUserHelper } from 'helper/UserHelper';
+import { login } from 'module/auth';
 
 
 const Login = () => {
     const router = useRouter()
     const { control, handleSubmit, register, formState: { errors } } = useForm();
     const onSubmit = async data => {
-        const sendData = {
-            "password": data.password,
-            "username": data.email,
-        }
-        const res = await postLogin({ src: "login", data: sendData })
+        const sendData = loginUserHelper({"data":data})
+        const res = await login({ src: "login", data: sendData })
         if (res.code === "OK") {
             await localStorage.setItem("@token", res.token)
             await localStorage.setItem("@usuario", JSON.stringify(res.usuario))
@@ -56,24 +54,24 @@ const Login = () => {
                 <h2>Introduzca sus datos</h2><br />
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Row className="" xs={1}>
-                        <Form.Group className="mb-3 col-md-12" controlId="formBasicEmail" as={Col}>
+                        <Form.Group className="mb-3 col-md-12" controlId="formBasicusername" as={Col}>
                             <Form.Label>Correo Electronico</Form.Label>
                             <FloatingLabel controlId="floatingInputGriduser" label="Escriba su correo electronico">
                                 <Form.Control
                                     type="text"
-                                    placeholder="Escriba su coreo"
-                                    {...register("email")}
+                                    placeholder="Escriba su nombre de usuario"
+                                    {...register("username")}
                                     defaultValue={``}
                                 />
                             </FloatingLabel>
                             <Form.Text className="text-muted">
-                                {!errors.email && <>Escriba su correo</>}
-                                {errors.email?.type === 'required' && <span className="text-danger">El correo es obligatorio</span>}
-                                {errors.email?.type === 'maxLength' && <span className="text-danger">El correo es obligatorio debe contener mas de 10 caracteres.</span>}
+                                {!errors.username && <>Escriba su correo</>}
+                                {errors.username?.type === 'required' && <span className="text-danger">El correo es obligatorio</span>}
+                                {errors.username?.type === 'maxLength' && <span className="text-danger">El correo es obligatorio debe contener mas de 10 caracteres.</span>}
                             </Form.Text>
                         </Form.Group>
 
-                        <Form.Group className="mb-3 col-md-12" controlId="formBasicEmail" as={Col}>
+                        <Form.Group className="mb-3 col-md-12" controlId="formBasicPassword" as={Col}>
                             <Form.Label>Contraseña</Form.Label>
                             <FloatingLabel controlId="floatingInputGridpassword" label="Escribe su contraseña">
                                 <Form.Control

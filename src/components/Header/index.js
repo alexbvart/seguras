@@ -1,5 +1,5 @@
 import useSession from '@hooks/useSesion';
-import logout from '@services/logout';
+import logout from 'module/auth';
 import SessionContext from 'context/session/SessionContext';
 import Link from 'next/link'
 import { useContext, useEffect } from 'react';

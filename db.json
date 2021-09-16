@@ -257,6 +257,65 @@
   "login": [
     {
       "id": 1
+    },
+    {
+      "nombre": "972001932",
+      "apellido_paterno": "BRIONES",
+      "apellido_materno": "VENTURA",
+      "telefono": "972001932",
+      "dni": "71602394",
+      "provincia": "TRUJILLO",
+      "distrito": "PACASMAYO",
+      "direccion": "UNT",
+      "referencia": "CERCA A LA PLAZUELA DEL NIÑO",
+      "id": 2
+    },
+    {
+      "nombre": "972001932",
+      "apellido_paterno": "BRIONES",
+      "apellido_materno": "VENTURA",
+      "telefono": "972001932",
+      "dni": "71602394",
+      "direccion": {
+        "provincia": "TRUJILLO",
+        "distrito": "PACASMAYO",
+        "direccion": "UNT",
+        "referencia": "CERCA A LA PLAZUELA DEL NIÑO"
+      },
+      "id": 3
+    },
+    {
+      "username": "kevin002",
+      "password": "maira002",
+      "id": 4
+    }
+  ],
+  "persona": [
+    {
+      "nombre": "ALEX",
+      "apellido_paterno": "BRIONES",
+      "apellido_materno": "Rodriguez",
+      "telefono": "972001932",
+      "dni": "71602394",
+      "direccion": {
+        "provincia": "TRUJILLO",
+        "distrito": "PACASMAYO",
+        "direccion": "UNT",
+        "referencia": "CERCA A LA PLAZUELA DEL NIÑO"
+      },
+      "id": 1
+    }
+  ],
+  "colaborador": [
+    {
+      "persona_id": 1,
+      "usuario_id": 1,
+      "id": 1
+    }
+  ],
+  "usuario": [
+    {
+      "id": 1
     }
   ]
 }

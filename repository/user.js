@@ -1,4 +1,4 @@
-import getAll from "@services/getAll";
+import getAll from "module/getAll";
 
 const userRepository = async () => {
     const user = {

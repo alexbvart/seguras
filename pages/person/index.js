@@ -1,4 +1,4 @@
-import getAll from '@services/getAll';
+import getAll from 'module/getAll';
 import React, {useEffect, useState} from 'react';
 const Person = () => {
     useEffect(() => {
