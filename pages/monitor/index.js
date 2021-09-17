@@ -13,10 +13,11 @@ const Monitor = ({ monitor }) => {
         setKeywordFilter(keyword)
         console.log("padre", keyword)
     }
-/*     useEffect(() => {
-        getAllCollaborator().then(res=>setMonitore(res))
+    useEffect(() => {
+        getAllCollaborator().then(res=>setMonitore(res.data))
     }, [])
-    console.log({monitore}) */
+    console.log({monitore})
+    
     return (
         <>
             <Head>
@@ -41,15 +42,15 @@ const Monitor = ({ monitor }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {(monitor && monitor.length > 0) &&
-                            monitor
+                        {(monitore && monitore.length > 0) &&
+                            monitore
                                 .filter(item => String(item.dni).toUpperCase().includes(keywordFilter.toUpperCase()) || String(item.user?.nombre).toUpperCase().includes(keywordFilter.toUpperCase()))
                                 .map((m, index) => (
                                     <tr>
                                         <td>{index}</td>
-                                        <td>{m.fullname}</td>
-                                        <td>{m.dni}</td>
-                                        <td>{m.telephone}</td>
+                                        <td>{`${m.persona?.nombre?.toUpperCase()} ${m.persona?.apellido_paterno?.toUpperCase()} ${m.persona?.apellido_materno?.toUpperCase()}`} </td>
+                                        <td>{m.persona?.dni}</td>
+                                        <td>{m.persona?.telefono}</td>
                                     </tr>
                                 ))
                         }

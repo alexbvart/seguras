@@ -37,7 +37,7 @@ const HeaderAdmin = () => {
                             <a>Registrar</a>
                         </Link>
                     </NavDropdown.Item>
-                    <NavDropdown.Item eventKey="4.2"><Link href="/monitor">
+                    <NavDropdown.Item eventKey="4.2"><Link href="/monitor/">
                         <a>Listar</a>
                     </Link></NavDropdown.Item>
                     {/* <NavDropdown.Item eventKey="4.3">Something else here</NavDropdown.Item>
