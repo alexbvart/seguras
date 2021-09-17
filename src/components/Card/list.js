@@ -5,6 +5,7 @@ import userRepository from 'repository/user';
 
 import { useRouter } from 'next/router'
 import SearchBar from '@components/SearchBar/SearchBar';
+import hacetiempo from 'util/hacetiempo';
 
 const CardList = ({ data }) => {
 
@@ -46,9 +47,9 @@ const CardList = ({ data }) => {
                             title={card.titulo   || card.user?.nombre || card.usuario?.nombre}
                         >
                             {card.location && <>
-                                Reporto un indicente cerca de {card.location} <br/> {card.src}
+                                Reporto un indicente cerca de {card.location} <br/>  {hacetiempo(card.created) }
                             </> }
-                            {card.descripcion && <>{card.descripcion}</>}                            
+                            {card.descripcion && <>{card.descripcion}<br/>  {hacetiempo(card.created) }</>}                            
                         </Card>
                     ))
                 }

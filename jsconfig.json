@@ -7,6 +7,7 @@
       "@helper/*": ["helper/*"],
       "@context/*": ["context/*"],
       "@module/*": ["module/*"],
+      "@util/*": ["util/*"],
       "@service/*": ["service/*"],
       "@components/*": ["src/components/*"],
       "@containers/*": ["src/containers/*"],
