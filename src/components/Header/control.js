@@ -9,7 +9,7 @@ const HeaderControl = () => {
                 <Nav.Item>
                     <Nav.Link eventKey="1" href="#/home">
                         <Link href="/notification">
-                            <a>Alertas</a>
+                            <a>Notificaciones</a>
                         </Link>
                     </Nav.Link>
                 </Nav.Item>

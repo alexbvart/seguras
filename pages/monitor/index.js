@@ -1,21 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head'
 import { Button, Col, Container, FloatingLabel, Form, Row, Table } from 'react-bootstrap';
-import { useForm } from 'react-hook-form';
-import swal from 'sweetalert';
-import post from 'module/post';
+import {getAllCollaborator} from '@service/CollaboratorServices'
 import SearchBar from '@components/SearchBar/SearchBar';
 
 
 
 const Monitor = ({ monitor }) => {
     const [keywordFilter, setKeywordFilter] = useState('')
-
+    const [monitore, setMonitore] = useState([])
     const handleOnSubmit = (keyword) => {
         setKeywordFilter(keyword)
         console.log("padre", keyword)
     }
-
+/*     useEffect(() => {
+        getAllCollaborator().then(res=>setMonitore(res))
+    }, [])
+    console.log({monitore}) */
     return (
         <>
             <Head>

@@ -17,10 +17,8 @@ const Monitor = () => {
         await e.target.reset(); // reset after form submit
     }
     const enterData = async (data)=>{
-
         const resPerson       = await createPerson({ "data": data });
         const resUser         = await createUser({ "data": data });
-        console.log({ persona_id: resPerson.data.data.id, usuario_id: resUser.data.data.usuario_id})
         const resCollaborator = await createCollaborator({ persona_id: resPerson.data.data.id, usuario_id: resUser.data.data.usuario_id })
         if (resCollaborator.status === 200) {
             swal("Datos registrados", "El personal de monitoreo fue registrado", "success", {

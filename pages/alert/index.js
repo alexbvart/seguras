@@ -1,10 +1,18 @@
 import Head from 'next/head'
 import CardList from '@components/Card/list'
 import useSession from '@hooks/useSesion';
+import { getAllAlerts } from '@service/AlertServices';
+import { useEffect, useState } from 'react';
 
 export default function Report({reports}) {
-  useSession()
-  
+  const [alerts, setAlerts] = useState([])
+
+  useEffect(() => {
+    getAllAlerts().then(res=>    setAlerts(res))
+  }, [])
+  console.log({alerts})
+  console.log({reports})
+  console.log([...reports,...alerts])
   return (
     <>
       <Head>
@@ -16,6 +24,7 @@ export default function Report({reports}) {
         <h1 className="title">
           Alertas recientes
         </h1>
+        {/* <CardList data={[...reports,...alerts]} /> */}
         <CardList data={reports} />
     </>
   )

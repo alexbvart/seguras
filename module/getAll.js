@@ -5,7 +5,6 @@ const getAll = async ({src}) => {
     await axiosinterceptor()
     const API_URL = process.env.NEXT_PUBLIC_API_AWS
     const getAllData = await axios.get(`${API_URL}/${src}`)
-
-    return getAllData.data;
+    return getAllData;
 }
 export default getAll;

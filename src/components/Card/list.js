@@ -38,12 +38,12 @@ const CardList = ({ data }) => {
             <div className={styles.grid}>
                 {(data && data.length > 0) &&
                     data
-                    .filter(item => String(item.descripcion).toUpperCase().includes(keywordFilter.toUpperCase()) || String(item.user?.nombre).toUpperCase().includes(keywordFilter.toUpperCase()))
+                    .filter(item => String(item.descripcion).toUpperCase().includes(keywordFilter.toUpperCase()) || String(item.usuario?.nombre).toUpperCase().includes(keywordFilter.toUpperCase()) || String(item.user?.nombre).toUpperCase().includes(keywordFilter.toUpperCase()))
                     .map((card, index) => (
                         <Card
                             key={card.id}
                             src={`${redirectionurl}/${card.id}`}
-                            title={card.titulo || card.user.nombre}
+                            title={card.titulo   || card.user?.nombre || card.usuario?.nombre}
                         >
                             {card.location && <>
                                 Reporto un indicente cerca de {card.location} <br/> {card.src}

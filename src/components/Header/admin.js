@@ -8,9 +8,16 @@ const HeaderAdmin = () => {
         <>
                         <Nav activeKey="1" onSelect={handleSelect}>
                 <Nav.Item>
-                    <Nav.Link eventKey="1" href="#/home">
-                        <Link href="/notification">
+                    <Nav.Link eventKey="1" href="#">
+                        <Link href="/alert">
                             <a>Alertas</a>
+                        </Link>
+                    </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link eventKey="1" href="#">
+                        <Link href="/notification">
+                            <a>Notificaciones</a>
                         </Link>
                     </Nav.Link>
                 </Nav.Item>

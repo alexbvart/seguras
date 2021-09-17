@@ -297,6 +297,22 @@
   
   ],
   "usuario": [
-
+    {
+      "id":6,
+      "appuser_id": 1,
+      "nombre": "Kevin",
+      "apellido_materno": "huaman",
+      "apellido_paterno": "saucedo",
+      "telefono": "983298327",
+      "dni": "88787656",
+      "direccion_id": 12,
+      "direccion": {
+          "direccion_id": 12,
+          "provincia": "chepen",
+          "distrito": "pacanga",
+          "direccion": "Panamericana norte San jose de moro",
+          "referencia": "costado de restaurante, don pepino"
+      }
+  }
   ]
 }
