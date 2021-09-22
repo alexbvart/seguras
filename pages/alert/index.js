@@ -4,15 +4,13 @@ import useSession from '@hooks/useSesion';
 import { getAllAlerts } from '@service/AlertServices';
 import { useEffect, useState } from 'react';
 
-export default function Report({reports}) {
+export default function Report({}) {
   const [alerts, setAlerts] = useState([])
 
   useEffect(() => {
     getAllAlerts().then(res=>    setAlerts(res))
   }, [])
   console.log({alerts})
-  console.log({reports})
-  console.log([...reports,...alerts])
   return (
     <>
       <Head>
@@ -25,7 +23,7 @@ export default function Report({reports}) {
           Alertas recientes
         </h1>
         {/* <CardList data={[...reports,...alerts]} /> */}
-        <CardList data={reports} />
+        <CardList data={alerts} />
     </>
   )
 }
@@ -33,11 +31,9 @@ export default function Report({reports}) {
 export async function getServerSideProps(context) {
   const { params } = context;
   const SERVER_HOST = process.env.NEXT_PUBLIC_API_PORT
-  const reports = await fetch(`${SERVER_HOST}/reports`)
-  .then(res => res.json())
+
   return {
       props: {
-        reports
       }
   };
 }

@@ -15,12 +15,13 @@ export const getAllAlertHelper = async ({ data }) => {
 }
 
 export const getAlertByIdHelper = async ({ alert }) => {
-    const user = alert?.usuario_id && await getUserById({ id: alert.usuario_id })
+    /* const user = alert?.usuario_id && await getUserById({ id: alert.usuario_id }) */
     const resFormat = {
         "alerta_id": alert.alerta_id,
         "latitude": alert.latitude,
         "longitude": alert.latitude,
-        "usuario": user,
+        "usuario_id": alert.usuario_id,
+        "usuario": alert.usuario,
         "estado": alert.estado,
         "multimedias": alert.multimedias,
         "created": alert.created,

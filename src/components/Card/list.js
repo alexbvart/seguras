@@ -12,7 +12,7 @@ const CardList = ({ data }) => {
     const [keywordFilter, setKeywordFilter] = useState('')
 
     const role = "user-ii"
-    const [linkurl, setLinkurl] = useState("report")
+    const [linkurl, setLinkurl] = useState("alert")
     const router = useRouter()
     useEffect(() => {
         const getRole= async()=>{
@@ -33,6 +33,8 @@ const CardList = ({ data }) => {
     }
 
     const redirectionurl= router.asPath
+
+    
     return (
         <>
             <SearchBar handleOnSubmit={handleOnSubmit}/>
@@ -42,12 +44,13 @@ const CardList = ({ data }) => {
                     .filter(item => String(item.descripcion).toUpperCase().includes(keywordFilter.toUpperCase()) || String(item.usuario?.nombre).toUpperCase().includes(keywordFilter.toUpperCase()) || String(item.user?.nombre).toUpperCase().includes(keywordFilter.toUpperCase()))
                     .map((card, index) => (
                         <Card
-                            key={card.id}
-                            src={`${redirectionurl}/${card.id}`}
-                            title={card.titulo   || card.user?.nombre || card.usuario?.nombre}
+                            key={card.alerta_id}
+                            src={`${redirectionurl}/${card.alerta_id}`}
+                            title={card.titulo   || `${card.usuario?.nombre} ${card.usuario?.apellido_paterno} ${card.usuario?.apellido_materno}` }
                         >
-                            {card.location && <>
-                                Reporto un indicente cerca de {card.location} <br/>  {hacetiempo(card.created) }
+                            {card.usuario.direccion && <>
+                                Reporto un indicente cerca de {card.usuario.direccion.direccion},  {card.usuario.direccion.distrito}
+                                <br/>  {hacetiempo(card.created) }
                             </> }
                             {card.descripcion && <>{card.descripcion}<br/>  {hacetiempo(card.created) }</>}                            
                         </Card>

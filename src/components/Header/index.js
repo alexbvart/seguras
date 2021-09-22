@@ -37,7 +37,7 @@ const Header = () => {
                         <Nav className="justify-content-end">
                             <Navbar.Text>
                                 {user ?
-                                    <NavDropdown title={"Alex Briones" ||user.username} id="nav-dropdown">
+                                    <NavDropdown title={user.username} id="nav-dropdown">
                                         <NavDropdown.Item>
                                             <Link href="/login">
                                                 <a><div onClick={() => existSesion()}>Cerrar sesión</div></a>
