@@ -6,7 +6,9 @@ import  post  from '@module/post';
 /* https://github.com/User0608/mujeresapi/blob/master/docs/USUARIO.md */
 export const createUser = async({data}) =>{
     const sendData = createUserHelper({ "data": data })
+    console.log("createUser",{sendData})
     const res = await post({ src: "usuario", data: sendData })
+    console.log("createUser",{res})
     return res
 }
 export const getAllUser = async() =>{
