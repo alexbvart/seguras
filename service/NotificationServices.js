@@ -11,9 +11,10 @@ import getById from "@module/getById";
 
 export const getAllNotification = async() =>{
     const res = await getAll({ src: "notificacion"})
-    const resComplet = getAllNotificationtHelper({ "data": res.data })
+    const resComplet = getAllNotificationtHelper({ "data": res.data.data })
     return resComplet
 }
+
 export const getNotificationById = async({id}) =>{
     const res = await getById({ src: "notificacion", id:id})
     const resComplet = getNotificationByIdHelper({ "data": res.data })

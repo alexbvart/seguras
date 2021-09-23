@@ -1,7 +1,15 @@
 import Head from 'next/head'
 import CardList from '@components/Card/list'
+import { getAllNotification } from '@service/NotificationServices'
+import { useEffect, useState } from 'react'
 
-export default function Notification({notifications}) {
+export default function Notification({}) {
+
+  const [notification, setNotification] = useState([])
+  useEffect(() => {
+    getAllNotification().then(res=>    setNotification(res))
+  }, [])
+  console.log(notification)
   return (
     <>
       <Head>
@@ -19,23 +27,17 @@ export default function Notification({notifications}) {
           Get started by editing{' '}
         </p> */}
         
-        <CardList data={notifications} />
+        <CardList data={notification} />
     </>
   )
 }
 
 export async function getServerSideProps(context) {
   const { params } = context;
-
   /* const { query } = params; */
-  const SERVER_HOST = process.env.NEXT_PUBLIC_API_PORT
-
-  const notifications = await fetch(`${SERVER_HOST}/notification`)
-  .then(res => res.json())
-
   return {
       props: {
-        notifications
+
       }
   };
 }

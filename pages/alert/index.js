@@ -4,9 +4,8 @@ import useSession from '@hooks/useSesion';
 import { getAllAlerts } from '@service/AlertServices';
 import { useEffect, useState } from 'react';
 
-export default function Report() {
+export default function Alert() {
   const [alerts, setAlerts] = useState([])
-
   useEffect(() => {
     getAllAlerts().then(res=>    setAlerts(res))
   }, [])
