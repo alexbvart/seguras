@@ -44,6 +44,19 @@ const HeaderAdmin = () => {
                     <NavDropdown.Divider />
                     <NavDropdown.Item eventKey="4.4">Separated link</NavDropdown.Item>*/}
                 </NavDropdown>
+                <NavDropdown title="Instituciones" id="nav-dropdown">
+                    <NavDropdown.Item eventKey="4.1">
+                        <Link href="/institution/new">
+                            <a>Registrar</a>
+                        </Link>
+                    </NavDropdown.Item>
+                    <NavDropdown.Item eventKey="4.2"><Link href="/institution/">
+                        <a>Listar</a>
+                    </Link></NavDropdown.Item>
+                    {/* <NavDropdown.Item eventKey="4.3">Something else here</NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item eventKey="4.4">Separated link</NavDropdown.Item>*/}
+                </NavDropdown>
 
             </Nav>
         </>
