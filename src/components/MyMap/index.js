@@ -7,7 +7,7 @@ const AnyReactComponent = ({ text }) => (
             alt="gps icono" />
     </div>
 )
-const MyMap = ({title="Ubicación"}) => {
+const MyMap = ({title="Ubicación", latitude, longitude}) => {
     const props = {
         center: {
             lat: -7.2208812,

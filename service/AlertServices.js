@@ -1,4 +1,4 @@
-import {getAllAlertHelper} from '@helper/AlertHelper'
+import {getAlertByIdHelper, getAllAlertHelper} from '@helper/AlertHelper'
 import getAll from "@module/getAll";
 import getById from "@module/getById";
 
@@ -16,6 +16,6 @@ export const getAllAlerts = async() =>{
 }
 export const getAlertById = async({id}) =>{
     const res = await getById({ src: "alerta", id:id})
-    const resComplet = await getAlertByIdHelper({ "data": res.data })
-    return resComplet
+    /* const resComplet = await getAlertByIdHelper({ "data": res.data }) */
+    return res.data.data
 }

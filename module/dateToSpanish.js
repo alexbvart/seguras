@@ -2,7 +2,7 @@
 const fecha = new Date("Thu Mar 18 2021 11:18:23 GMT-0500 (Peru Standard Time)")
 dateToSpanish(fecha)
  */
-    ;
+
 const dateToSpanish = (fecha) => {
 
     const MONTHS = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
@@ -26,7 +26,7 @@ const dateToSpanish = (fecha) => {
 
     console.log({fechaobj, DAY_OF_WEEK, DAY_OF_MONTH,MONTH,YEAR,HOUR,MINUTES,SECONDS});
 
-    return `${DAY_OF_WEEK} ${DAY_OF_MONTH} / ${MONTH} / ${YEAR} a ${HOUR}:${MINUTES}:${SECONDS}`;
+    return `${DAY_OF_WEEK} ${DAY_OF_MONTH}/${MONTH}/${YEAR} a ${HOUR}:${MINUTES}:${SECONDS}`;
 
 }
 export default dateToSpanish;

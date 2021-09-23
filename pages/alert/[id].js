@@ -1,17 +1,35 @@
+import Multimedia from '@components/Multimedia';
 import MyMap from '@components/MyMap';
+import dateToSpanish from '@module/dateToSpanish';
+import { getAlertById } from '@service/AlertServices';
+import hacetiempo from '@util/hacetiempo';
 import post from 'module/post';
 
 import Head from 'next/head';
-import React from 'react';
-import { Container, Row, Col, Form, FloatingLabel, Button } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Container, Row, Col, Form, FloatingLabel, Button, Carousel } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image'
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
-const reports = ({ id, report }) => {
 
+
+
+const alertbyid = ({ id }) => {
     const { control, handleSubmit, register, formState: { errors } } = useForm();
-    const onSubmit = async data =>{
-        const sendData ={
+    const [alert, setAlert] = useState({})
+    const [index, setIndex] = useState(0);
+    const fullname = `${alert?.usuario?.nombre} ${alert?.usuario?.apellido_paterno} ${alert?.usuario?.apellido_materno}`
+    const fulldirection= `${alert?.usuario?.direccion?.direccion}, ${alert?.usuario?.direccion?.distrito},  ${alert?.usuario?.direccion?.provincia}`
+    const handleSelect = (selectedIndex, e) => {
+        setIndex(selectedIndex);
+    };
+
+    useEffect(() => {
+        getAlertById({ id }).then(res => setAlert(res))
+    }, [])
+    console.log(alert.multimedias)
+    const onSubmit = async data => {
+        const sendData = {
             "alertaId": id,
             "intitucion_id": data.intitution,
             "titulo": report.user.nombre,
@@ -19,21 +37,22 @@ const reports = ({ id, report }) => {
             "descripcion": data.description,
             "colaborador_id": "1"
         }
-        const res = await post({src:"notification", data:sendData})
-        if(res.status===201){
+        const res = await post({ src: "notification", data: sendData })
+        if (res.status === 201) {
             swal("Datos registrados", "La notificación fue enviada", "success", {
                 button: "De acuerdo",
             });
-        }else{
+        } else {
             swal("Algo salio mal", "La notificación no fue enviada", "warning", {
                 button: "De acuerdo",
             });
         }
-    } 
+    }
+
     return (
         <>
             <Head>
-                <title>Report {`${id}`}</title>
+                <title>Alert {`${id}`}</title>
                 <meta name="description" content="Application monitoring platform secure" />
                 <link rel="icon" href="/favicon.ico" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -42,24 +61,45 @@ const reports = ({ id, report }) => {
                 Alerta #{`${id}`}
             </h1>
             <br />
+
             <Container >
                 <Row xs={1} sm={2}>
                     <Col>
                         <article>
                             <h2>Registrada por:</h2>
-                            <p>{report.user.nombre}</p>
-                            {/* <h2>Fecha y hora:</h2>
-                            <p>{report.user.nombre}</p> */}
+                            <p>{fullname}</p>
+                            <h2>Fecha y hora:</h2>
+                            <p>{hacetiempo(alert?.created)}, {dateToSpanish(alert?.created)}</p>
                             <h2>Ubicación:</h2>
-                            <p>{report.location}</p>
+                            <p>{fulldirection}</p>
                         </article>
                     </Col>
-                    <Col>
-                        <Image src={report.multimedia} fluid />
-                    </Col>
                 </Row>
-                <Row>
-                    <MyMap title={report.user.nombre}/>
+
+                <Row xs={1} sm={2}>
+                    {alert.multimedias &&
+                        <Col>
+                            <Carousel activeIndex={index} onSelect={handleSelect}>
+                                {alert.multimedias.map((m, index) => (
+                                    <Carousel.Item>
+                                        <Multimedia
+                                            src={m.url}
+                                            type={m.tipo}
+                                        />
+                                        <Carousel.Caption>
+                                            {/* <h3>First slide label</h3> */}
+                                            <p>Evidencia {`${index + 1}`}</p>
+                                        </Carousel.Caption>
+                                    </Carousel.Item>
+                                ))}
+                            </Carousel>
+                        </Col>}
+                    <Col>
+                        <MyMap
+                            title={fullname}
+                            longitude={alert?.longitude}
+                            latitude={alert?.latitude} />
+                    </Col>
                 </Row>
             </Container>
             <br />
@@ -72,11 +112,11 @@ const reports = ({ id, report }) => {
                                 {...register("description", { required: true })}
                             >Descripción de lo ocurrido</Form.Label>
                             <FloatingLabel controlId="floatingInputGrid" label="Escribe una descripción">
-                                <Form.Control 
-                                    type="text" 
-                                    placeholder="Escribe una descripción" 
-                                    {...register("description")} 
-                                    defaultValue={`${report.user.nombre} reporto una incidencia en ${report.location}`}
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Escribe una descripción"
+                                    {...register("description")}
+                                    defaultValue={`${fullname} alerto una incidencia en ${fulldirection}`}
                                 />
                             </FloatingLabel>
                             <Form.Text className="text-muted">
@@ -124,19 +164,15 @@ const reports = ({ id, report }) => {
         </>
     );
 }
-export default reports;
+export default alertbyid;
 export async function getServerSideProps(context) {
     const { params } = context;
     const { id } = params;
     /* const { query } = params; */
     const SERVER_HOST = process.env.NEXT_PUBLIC_API_PORT
 
-    const report = await fetch(`${SERVER_HOST}/reports/${id}`)
-        .then(res => res.json())
-
     return {
         props: {
-            report,
             id
         }
     };

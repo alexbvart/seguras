@@ -19,7 +19,7 @@ export const getAlertByIdHelper = async ({ alert }) => {
     const resFormat = {
         "alerta_id": alert.alerta_id,
         "latitude": alert.latitude,
-        "longitude": alert.latitude,
+        "longitude": alert.longitude,
         "usuario_id": alert.usuario_id,
         "usuario": alert.usuario,
         "estado": alert.estado,
