@@ -1,33 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head'
 import { Button, Col, Container, FloatingLabel, Form, Row, Table } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
 import post from 'module/post';
 import SearchBar from '@components/SearchBar/SearchBar';
-import { getAllInstitutions } from '@service/InstitutionServices';
+import { getAllMePolice } from '@service/PoliceServices';
 
 
 
 const Police = () => {
     const [keywordFilter, setKeywordFilter] = useState('')
     const [police, setPolice] = useState([])
-    const [institution, setInstitution] = useState([])
 
 
     useEffect(() => {
-        getAllInstitutions().then(res=>setInstitution(res.data))
+        getAllMePolice().then(res=>setPolice(res.data.data))
+
     }, [])
-    console.log(institution)
 
     const handleOnSubmit = (keyword) => {
         setKeywordFilter(keyword)
         console.log("padre", keyword)
     }
-    useEffect(() => {
-        getAllPolice().then(res=>setPolice(res.data))
-    }, [])
-    console.log(police)
+
     return (
         <>
             <Head>
@@ -57,11 +53,10 @@ const Police = () => {
                                 .filter(item => String(item.dni).toUpperCase().includes(keywordFilter.toUpperCase()) || String(item.user?.nombre).toUpperCase().includes(keywordFilter.toUpperCase()))
                                 .map((p, index) => (
                                     <tr>
-                                        <td>{index}</td>
-                                        <td>{`${p.name} ${p.apellido_paterno} ${p.apellido_materno}` }</td>
-                                        <td>{p.dni}</td>
-                                        <td>{p.telephone}</td>
-                                        <td>{`${p.direccion}, ${p.distrito}`}</td>
+                                        <td>{index+1}</td>
+                                        <td>{`${p.persona.nombre} ${p.persona.apellido_paterno} ${p.persona.apellido_materno}` }</td>
+                                        <td>{p.persona.dni}</td>
+                                        <td>{p.persona.telefono}</td>
                                     </tr>
                                 ))
                         }

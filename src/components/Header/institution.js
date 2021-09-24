@@ -5,7 +5,7 @@ const HeaderInstitution = () => {
 
     return (
         <>
-            <Nav activeKey="1" onSelect={handleSelect} className="navbar navbar-dark bg-dark">
+            <Nav activeKey="1" onSelect={handleSelect} >
                 <Nav.Item>
                     <Nav.Link eventKey="1" href="#/home">
                         <Link href="/notification">
@@ -25,7 +25,7 @@ const HeaderInstitution = () => {
                 </Nav.Item> */}
                 <NavDropdown title="Personal de policia" id="nav-dropdown">
                     <NavDropdown.Item eventKey="4.1">
-                        <Link href="/police/NEW">
+                        <Link href="/police/new">
                             <a>Registrar</a>
                         </Link>
                     </NavDropdown.Item>

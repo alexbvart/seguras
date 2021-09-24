@@ -23,3 +23,8 @@ export const getInstitutionById = async({id}) =>{
     /* const resComplet = await getInstitutionByIdHelper({ "data": res.data }) */
     return res.data.data
 }
+export const getMeInstitution = async() =>{
+    const res = await getAll({ src: "institucion/me"})
+    /* const resComplet = await  getAllInstitutionHelper({ "data": res.data }) */
+    return res.data
+}

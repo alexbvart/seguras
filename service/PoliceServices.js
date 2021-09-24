@@ -12,12 +12,15 @@ export const createPolice = async({data}) =>{
 
 export const getAllPolice = async() =>{
     const res = await getAll({ src: "efectivo"})
-    const resComplet = getAllPolicetHelper({ "data": res.data.data })
-    return resComplet
+    return res
+}
+export const getAllMePolice = async() =>{
+    const res = await getAll({ src: "efectivo/institucion"})
+    return res
 }
 
 export const getPoliceById = async({id}) =>{
-    const res = await getById({ src: "efectivo", id:id})
+    const res = await getById({ src: "efectivo/institucion", id:id})
     const resComplet = getPoliceByIdHelper({ "data": res.data })
     return resComplet
 }

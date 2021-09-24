@@ -13,7 +13,7 @@ import { header, headerspaces } from './styles.module.css'
 const TYPES_HEADER = {
     "admin": <HeaderAdmin />,
     "user-t2": <HeaderControl />,
-    "user-t3": <HeaderInstitution />
+    "user-ii": <HeaderInstitution />
 }
 
 const Header = () => {

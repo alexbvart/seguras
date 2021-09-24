@@ -29,7 +29,7 @@ const Monitor = () => {
             </Head>
             <Container >
                 <h1 className="title">
-                    Lista del personal de monitoreo
+                    Lista de usuarios
                 </h1>
                 <br />
                 <SearchBar handleOnSubmit={handleOnSubmit} />
@@ -39,6 +39,7 @@ const Monitor = () => {
                             <th>#</th>
                             <th>Nombre de ususrio</th>
                             <th>Estado</th>
+                            <th>Roles</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,6 +51,7 @@ const Monitor = () => {
                                         <td>{index}</td>
                                         <td>{m.username}</td>
                                         <td>{m.estado ? "Activo" : "Inactivo"}</td>
+                                        <td>{`${m.roles && m.roles.map((r)=> r.descripcion)} - `}</td>
                                     </tr>
                                 ))
                         }

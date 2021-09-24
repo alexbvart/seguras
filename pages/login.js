@@ -20,7 +20,7 @@ const Login = () => {
             let role = res.usuario.roles[0]
             if (role.nombre === "user-t2")
                 router.push("/monitor")
-            if (role.nombre === "user-t3")
+            if (role.nombre === "user-ii")
                 router.push("/notification")
             if (role.nombre === "admin")
                 router.push("/")

@@ -237,7 +237,7 @@ const Monitor = () => {
                                             label="Intitución"
                                             name="roles"
                                             type="checkbox"
-                                            value="3"
+                                            value="4"
                                             id={`checkboxtype`}
                                             {...register("roles", { required: true})}
                                         />
@@ -246,7 +246,7 @@ const Monitor = () => {
                                             label="Control"
                                             name="roles"
                                             type="checkbox"
-                                            value="2"
+                                            value="3"
                                             id={`checkboxtype`}
                                             {...register("roles", { required: true})}
                                         />

@@ -4,24 +4,22 @@ import { Button, Col, Container, FloatingLabel, Form, Row } from 'react-bootstra
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
 import post from 'module/post';
-import { getAllInstitutions } from '@service/InstitutionServices';
+import { getAllInstitutions, getMeInstitution } from '@service/InstitutionServices';
 import { createPolice } from '@service/PoliceServices';
 
 
 const Police = () => {
     const { control, handleSubmit, register, formState: { errors } } = useForm();
-    const [institution, setInstitution] = useState([])
+    const [me, setMe] = useState([])
 
 
     useEffect(() => {
-        getAllInstitutions().then(res => setInstitution(res.data))
+        getMeInstitution().then(res => setMe(res.data))
     }, [])
-    console.log(institution)
 
-    const onSubmit = async data => {
-        console.log({data})
+    const onSubmit = async (data,e) => {
         const res = await createPolice({data})
-        if (res.status === 201) {
+        if (res.status === 200) {
             swal("Datos registrados", "La notificación fue enviada", "success", {
                 button: "De acuerdo",
             });
@@ -30,6 +28,7 @@ const Police = () => {
                 button: "De acuerdo",
             });
         }
+        e.target.reset()
     }
 
     return (
@@ -50,24 +49,12 @@ const Police = () => {
                 <h2>Introduzca los datos del oficial</h2><br />
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Row className="" xs={1} sm={3}>
-                        <Form.Group className="mb-3 " controlId="institucion_id" as={Col}>
-                            <Form.Label>Tipo de institución</Form.Label>
-                            <FloatingLabel controlId="floatingInputGriddni" label="Selecione una institución">
-                                <Form.Select
+                                <Form.Control
+                                    type="hidden"
+                                    placeholder=""
+                                    defaultValue={me.institucion_id}
                                     {...register("institucion_id", { required: true })}
-                                    aria-label="Default select example"
-                                >
-                                    <option>Open this select menu</option>
-                                    {
-                                        institution&&institution.map((i)=>(<option value={i.institucion_id}>{i.nombre}</option>))
-                                    }
-                                </Form.Select>
-                            </FloatingLabel>
-                            <Form.Text className="text-muted">
-                                {!errors.dni && <>Selecione el tipo de institución</>}
-                                {errors.dni?.type === 'required' && <span className="text-danger">Selecione el tipo de institución</span>}
-                            </Form.Text>
-                        </Form.Group>
+                                />
                         <Form.Group className="mb-3 " controlId="formBasicEmail" as={Col}>
                             <Form.Label>Nombre</Form.Label>
                             <FloatingLabel controlId="floatingInputGrid" label="Escribe su nombre">
