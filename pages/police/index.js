@@ -12,7 +12,7 @@ import { getAllMePolice } from '@service/PoliceServices';
 const Police = () => {
     const [keywordFilter, setKeywordFilter] = useState('')
     const [police, setPolice] = useState([])
-
+console.log(police)
 
     useEffect(() => {
         getAllMePolice().then(res=>setPolice(res.data.data))
@@ -34,7 +34,7 @@ const Police = () => {
             </Head>
             <Container >
                 <h1 className="title">
-                    Lista del personal de monitoreo
+                    Lista del personal de policia
                 </h1>
                 <br />
                 <SearchBar handleOnSubmit={handleOnSubmit} />
@@ -50,9 +50,9 @@ const Police = () => {
                     <tbody>
                         {(police && police.length > 0) &&
                             police
-                                .filter(item => String(item.dni).toUpperCase().includes(keywordFilter.toUpperCase()) || String(item.user?.nombre).toUpperCase().includes(keywordFilter.toUpperCase()))
+                                .filter(item => String(item.persona.dni).toUpperCase().includes(keywordFilter.toUpperCase()) )
                                 .map((p, index) => (
-                                    <tr>
+                                    <tr key={index}>
                                         <td>{index+1}</td>
                                         <td>{`${p.persona.nombre} ${p.persona.apellido_paterno} ${p.persona.apellido_materno}` }</td>
                                         <td>{p.persona.dni}</td>

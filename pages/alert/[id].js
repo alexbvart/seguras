@@ -2,6 +2,8 @@ import Multimedia from '@components/Multimedia';
 import MyMap from '@components/MyMap';
 import dateToSpanish from '@module/dateToSpanish';
 import { getAlertById } from '@service/AlertServices';
+import { getMeCollaborator } from '@service/CollaboratorServices';
+import { getAllInstitutions } from '@service/InstitutionServices';
 import hacetiempo from '@util/hacetiempo';
 import post from 'module/post';
 
@@ -18,27 +20,35 @@ const alertbyid = ({ id }) => {
     const { control, handleSubmit, register, formState: { errors } } = useForm();
     const [alert, setAlert] = useState({})
     const [index, setIndex] = useState(0);
+    const [institution, setInstitution] = useState([]);
+    const [collaborator, setCollaborator] = useState([]);
+
     const fullname = `${alert?.usuario?.nombre} ${alert?.usuario?.apellido_paterno} ${alert?.usuario?.apellido_materno}`
-    const fulldirection= `${alert?.usuario?.direccion?.direccion}, ${alert?.usuario?.direccion?.distrito},  ${alert?.usuario?.direccion?.provincia}`
+    const fulldirection = `${alert?.usuario?.direccion?.direccion}, ${alert?.usuario?.direccion?.distrito},  ${alert?.usuario?.direccion?.provincia}`
     const handleSelect = (selectedIndex, e) => {
         setIndex(selectedIndex);
     };
 
     useEffect(() => {
         getAlertById({ id }).then(res => setAlert(res))
+        getAllInstitutions().then(res => setInstitution(res.data))
+        getMeCollaborator().then(res => setCollaborator(res.data))
     }, [])
-    console.log(alert.multimedias)
+
+
     const onSubmit = async data => {
         const sendData = {
-            "alertaId": id,
-            "intitucion_id": data.intitution,
-            "titulo": report.user.nombre,
-            "nivel": data.level,
+            "alerta_id": parseInt(alert.alerta_id),
+            "institucion_id": parseInt(data.institucion_id),
+            "titulo": data.titulo,
+            "nivel": parseInt(data.level),
             "descripcion": data.description,
-            "colaborador_id": "1"
+            "colaborador_id": parseInt(collaborator.colaborador_id)
         }
-        const res = await post({ src: "notification", data: sendData })
-        if (res.status === 201) {
+        console.log({sendData},"-----------------")
+        const res = await post({ src: "notificacion", data: sendData })
+        console.log({res},"-----------------")
+        if (res.status === 201||res.status === 200) {
             swal("Datos registrados", "La notificación fue enviada", "success", {
                 button: "De acuerdo",
             });
@@ -109,6 +119,22 @@ const alertbyid = ({ id }) => {
                     <Row className="" xs={1} md={3}>
                         <Form.Group className="mb-3 col-md-12" controlId="formBasicEmail" as={Col}>
                             <Form.Label
+                            >Título de lo ocurrido</Form.Label>
+                            <FloatingLabel controlId="floatingInputGrid" label="Escribe una título">
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Escribe una título"
+                                    {...register("titulo")}
+                                />
+                            </FloatingLabel>
+                            <Form.Text className="text-muted">
+                                {!errors.description && <>Añade un resumen de la alerta.</>}
+                                {errors.description?.type === 'required' && <span className="text-danger">Añade un resumen de la alerta.</span>}
+                                {errors.description?.type === 'maxLength' && <span className="text-danger">El resumen debe contener mas de 10 caracteres.</span>}
+                            </Form.Text>
+                        </Form.Group>
+                        <Form.Group className="mb-3 col-md-12" controlId="formBasicEmail" as={Col}>
+                            <Form.Label
                                 {...register("description", { required: true })}
                             >Descripción de lo ocurrido</Form.Label>
                             <FloatingLabel controlId="floatingInputGrid" label="Escribe una descripción">
@@ -116,7 +142,6 @@ const alertbyid = ({ id }) => {
                                     type="text"
                                     placeholder="Escribe una descripción"
                                     {...register("description")}
-                                    defaultValue={`${fullname} alerto una incidencia en ${fulldirection}`}
                                 />
                             </FloatingLabel>
                             <Form.Text className="text-muted">
@@ -142,16 +167,15 @@ const alertbyid = ({ id }) => {
                             </FloatingLabel>
                         </Form.Group>
                         <Form.Group className="mb-3 col-md-6" controlId="formBasicEmail" as={Col}>
-                            <Form.Label>Notificar a una comiaria o intitución </Form.Label>
-                            <FloatingLabel controlId="floatingSelectGrid" label="Trabaja con selecciones">
-                                <Form.Select aria-label="Comisarias cercanas"
-                                    {...register("intitution", { required: true })}>
-                                    <option>Abre y seleciona una comisaria </option>
-                                    <option value="1">PNP Chepén</option>
-                                    <option value="2">PNP Guadalupe</option>
-                                    <option value="3">PNP San Jose</option>
-                                    <option value="4">PNP Pacasmayo</option>
-                                    <option value="5">PNP San Pedro de Lloc</option>
+                            <Form.Label>Notificar a un oficial de la institución </Form.Label>
+                            <FloatingLabel controlId="floatingSelectGrid" label="Abre y seleciona un oficial">
+                                <Form.Select aria-label="Institución"
+                                    {...register("institucion_id", { required: true })}>
+                                    {
+                                        institution.map(({ institucion_id, nombre }) => (
+                                            <option value={institucion_id}>{nombre}</option>
+                                        ))
+                                    }
                                 </Form.Select>
                             </FloatingLabel>
                         </Form.Group>

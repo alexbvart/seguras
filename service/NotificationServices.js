@@ -14,6 +14,11 @@ export const getAllNotification = async() =>{
     const resComplet = getAllNotificationtHelper({ "data": res.data.data })
     return resComplet
 }
+export const getAllMeNotification = async() =>{
+    const res = await getAll({ src: "notificacion/institucion"})
+    const resComplet = getAllNotificationtHelper({ "data": res.data.data })
+    return resComplet
+}
 
 export const getNotificationById = async({id}) =>{
     const res = await getById({ src: "notificacion", id:id})

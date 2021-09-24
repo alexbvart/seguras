@@ -8,8 +8,8 @@ const HeaderControl = () => {
             <Nav activeKey="1" onSelect={handleSelect}>
                 <Nav.Item>
                     <Nav.Link eventKey="1" href="#/home">
-                        <Link href="/notification">
-                            <a>Notificaciones</a>
+                        <Link href="/alert">
+                            <a>Alertas</a>
                         </Link>
                     </Nav.Link>
                 </Nav.Item>

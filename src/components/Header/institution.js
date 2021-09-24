@@ -8,7 +8,7 @@ const HeaderInstitution = () => {
             <Nav activeKey="1" onSelect={handleSelect} >
                 <Nav.Item>
                     <Nav.Link eventKey="1" href="#/home">
-                        <Link href="/notification">
+                        <Link href="/notification/institution">
                             <a>Notificationes</a>
                         </Link>
                     </Nav.Link>

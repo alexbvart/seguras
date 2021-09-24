@@ -9,6 +9,10 @@ export const createCollaborator = async({persona_id, usuario_id}) =>{
     return res
 }
 
+export const getMeCollaborator = async () =>{
+    const res = await getAll({src:"colaborador/me"})
+    return res.data
+}
 export const getAllCollaborator = async () =>{
     const res = await getAll({src:"colaborador"})
     return res.data
