@@ -1,33 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head'
 import { Button, Col, Container, FloatingLabel, Form, Row, Table } from 'react-bootstrap';
-import { useForm } from 'react-hook-form';
-import swal from 'sweetalert';
-import post from 'module/post';
+import {getAllCollaborator} from '@service/CollaboratorServices'
+import {getAllUser} from '@service/UserServices'
 import SearchBar from '@components/SearchBar/SearchBar';
-import { getAllInstitutions } from '@service/InstitutionServices';
 
 
 
-const Police = () => {
+const Monitor = () => {
     const [keywordFilter, setKeywordFilter] = useState('')
-    const [police, setPolice] = useState([])
-    const [institution, setInstitution] = useState([])
-
-
-    useEffect(() => {
-        getAllInstitutions().then(res=>setInstitution(res.data))
-    }, [])
-    console.log(institution)
-
+    const [user, setUser] = useState([])
     const handleOnSubmit = (keyword) => {
         setKeywordFilter(keyword)
         console.log("padre", keyword)
     }
     useEffect(() => {
-        getAllPolice().then(res=>setPolice(res.data))
+        getAllUser().then(res=>setUser(res.data))
     }, [])
-    console.log(police)
+    console.log({user})
+    
     return (
         <>
             <Head>
@@ -46,22 +37,19 @@ const Police = () => {
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Nombre y apellidos</th>
-                            <th>D.N.I.</th>
-                            <th>Telefono</th>
+                            <th>Nombre de ususrio</th>
+                            <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {(police && police.length > 0) &&
-                            police
+                        {(user && user.length > 0) &&
+                            user
                                 .filter(item => String(item.dni).toUpperCase().includes(keywordFilter.toUpperCase()) || String(item.user?.nombre).toUpperCase().includes(keywordFilter.toUpperCase()))
-                                .map((p, index) => (
+                                .map((m, index) => (
                                     <tr>
                                         <td>{index}</td>
-                                        <td>{`${p.name} ${p.apellido_paterno} ${p.apellido_materno}` }</td>
-                                        <td>{p.dni}</td>
-                                        <td>{p.telephone}</td>
-                                        <td>{`${p.direccion}, ${p.distrito}`}</td>
+                                        <td>{m.username}</td>
+                                        <td>{m.estado ? "Activo" : "Inactivo"}</td>
                                     </tr>
                                 ))
                         }
@@ -73,12 +61,12 @@ const Police = () => {
     );
 }
 
-export default Police;
+export default Monitor;
 
 export async function getServerSideProps(context) {
     const { params } = context;
     const SERVER_HOST = process.env.NEXT_PUBLIC_API_PORT
-
+    
     return {
         props: {
         }

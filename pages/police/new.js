@@ -1,36 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head'
 import { Button, Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
 import post from 'module/post';
+import { getAllInstitutions } from '@service/InstitutionServices';
+import { createPolice } from '@service/PoliceServices';
 
 
 const Police = () => {
     const { control, handleSubmit, register, formState: { errors } } = useForm();
-    const onSubmit = async data =>{
-        const sendData ={
-            "nombre": data.nombre,
-            "apellido_paterno": data.apellido_paterno,
-            "apellido_materno": data.apellido_materno,
-            "telefono": data.telefono,
-            "dni": data.dni,
-            "provincia": data.provincia,
-            "distrito": data.distrito,
-            "direccion": data.direccion,
-            "referencia": data.referencia,
-        }
-        const res = await post({src:"login", data:sendData})
-        if(res.status===201){
+    const [institution, setInstitution] = useState([])
+
+
+    useEffect(() => {
+        getAllInstitutions().then(res => setInstitution(res.data))
+    }, [])
+    console.log(institution)
+
+    const onSubmit = async data => {
+        console.log({data})
+        const res = await createPolice({data})
+        if (res.status === 201) {
             swal("Datos registrados", "La notificación fue enviada", "success", {
                 button: "De acuerdo",
             });
-        }else{
+        } else {
             swal("Algo salio mal", "La notificación no fue enviada", "warning", {
                 button: "De acuerdo",
             });
         }
-    } 
+    }
 
     return (
         <>
@@ -45,18 +45,36 @@ const Police = () => {
                 Registro de oficiales
             </h1>
             <br />
-    
+
             <Container >
                 <h2>Introduzca los datos del oficial</h2><br />
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Row className="" xs={1} sm={3}>
+                        <Form.Group className="mb-3 " controlId="institucion_id" as={Col}>
+                            <Form.Label>Tipo de institución</Form.Label>
+                            <FloatingLabel controlId="floatingInputGriddni" label="Selecione una institución">
+                                <Form.Select
+                                    {...register("institucion_id", { required: true })}
+                                    aria-label="Default select example"
+                                >
+                                    <option>Open this select menu</option>
+                                    {
+                                        institution&&institution.map((i)=>(<option value={i.institucion_id}>{i.nombre}</option>))
+                                    }
+                                </Form.Select>
+                            </FloatingLabel>
+                            <Form.Text className="text-muted">
+                                {!errors.dni && <>Selecione el tipo de institución</>}
+                                {errors.dni?.type === 'required' && <span className="text-danger">Selecione el tipo de institución</span>}
+                            </Form.Text>
+                        </Form.Group>
                         <Form.Group className="mb-3 " controlId="formBasicEmail" as={Col}>
                             <Form.Label>Nombre</Form.Label>
                             <FloatingLabel controlId="floatingInputGrid" label="Escribe su nombre">
-                                <Form.Control 
-                                    type="text" 
-                                    placeholder="" 
-                                    {...register("nombre", { required: true })} 
+                                <Form.Control
+                                    type="text"
+                                    placeholder=""
+                                    {...register("nombre", { required: true })}
                                 />
                             </FloatingLabel>
                             <Form.Text className="text-muted">
@@ -68,10 +86,10 @@ const Police = () => {
                         <Form.Group className="mb-3 " controlId="formBasicEmail" as={Col}>
                             <Form.Label>Apellido Paterno</Form.Label>
                             <FloatingLabel controlId="floatingInputGrid" label="Escribe su apellido_paterno">
-                                <Form.Control 
-                                    type="text" 
-                                    placeholder="" 
-                                    {...register("apellido_paterno", { required: true })} 
+                                <Form.Control
+                                    type="text"
+                                    placeholder=""
+                                    {...register("apellido_paterno", { required: true })}
                                 />
                             </FloatingLabel>
                             <Form.Text className="text-muted">
@@ -83,10 +101,10 @@ const Police = () => {
                         <Form.Group className="mb-3 " controlId="formBasicEmail" as={Col}>
                             <Form.Label>Apellido Materno</Form.Label>
                             <FloatingLabel controlId="floatingInputGrid" label="Escribe su apellido_materno">
-                                <Form.Control 
-                                    type="text" 
-                                    placeholder="" 
-                                    {...register("apellido_materno", { required: true })} 
+                                <Form.Control
+                                    type="text"
+                                    placeholder=""
+                                    {...register("apellido_materno", { required: true })}
                                 />
                             </FloatingLabel>
                             <Form.Text className="text-muted">
@@ -98,10 +116,10 @@ const Police = () => {
                         <Form.Group className="mb-3 " controlId="formBasicEmail" as={Col}>
                             <Form.Label>Telefono</Form.Label>
                             <FloatingLabel controlId="floatingInputGrid" label="Escribe su telefono">
-                                <Form.Control 
-                                    type="text" 
-                                    placeholder="" 
-                                    {...register("telefono", { required: true })} 
+                                <Form.Control
+                                    type="text"
+                                    placeholder=""
+                                    {...register("telefono", { required: true })}
                                 />
                             </FloatingLabel>
                             <Form.Text className="text-muted">
@@ -113,10 +131,10 @@ const Police = () => {
                         <Form.Group className="mb-3 " controlId="formBasicEmail" as={Col}>
                             <Form.Label>D.N.I.</Form.Label>
                             <FloatingLabel controlId="floatingInputGrid" label="Escribe su dni">
-                                <Form.Control 
-                                    type="text" 
-                                    placeholder="" 
-                                    {...register("dni", { required: true })} 
+                                <Form.Control
+                                    type="text"
+                                    placeholder=""
+                                    {...register("dni", { required: true })}
                                 />
                             </FloatingLabel>
                             <Form.Text className="text-muted">
@@ -128,10 +146,10 @@ const Police = () => {
                         <Form.Group className="mb-3 " controlId="formBasicEmail" as={Col}>
                             <Form.Label>Provincia</Form.Label>
                             <FloatingLabel controlId="floatingInputGrid" label="Escribe su provincia">
-                                <Form.Control 
-                                    type="text" 
-                                    placeholder="" 
-                                    {...register("provincia", { required: true })} 
+                                <Form.Control
+                                    type="text"
+                                    placeholder=""
+                                    {...register("provincia", { required: true })}
                                 />
                             </FloatingLabel>
                             <Form.Text className="text-muted">
@@ -143,10 +161,10 @@ const Police = () => {
                         <Form.Group className="mb-3 " controlId="formBasicEmail" as={Col}>
                             <Form.Label>Distrito</Form.Label>
                             <FloatingLabel controlId="floatingInputGrid" label="Escribe su distrito">
-                                <Form.Control 
-                                    type="text" 
-                                    placeholder="" 
-                                    {...register("distrito", { required: true })} 
+                                <Form.Control
+                                    type="text"
+                                    placeholder=""
+                                    {...register("distrito", { required: true })}
                                 />
                             </FloatingLabel>
                             <Form.Text className="text-muted">
@@ -158,10 +176,10 @@ const Police = () => {
                         <Form.Group className="mb-3 " controlId="formBasicEmail" as={Col}>
                             <Form.Label>Dirección</Form.Label>
                             <FloatingLabel controlId="floatingInputGrid" label="Escribe su direccion">
-                                <Form.Control 
-                                    type="text" 
-                                    placeholder="" 
-                                    {...register("direccion", { required: true })} 
+                                <Form.Control
+                                    type="text"
+                                    placeholder=""
+                                    {...register("direccion", { required: true })}
                                 />
                             </FloatingLabel>
                             <Form.Text className="text-muted">
@@ -173,10 +191,10 @@ const Police = () => {
                         <Form.Group className="mb-3 " controlId="formBasicEmail" as={Col}>
                             <Form.Label>Referencia</Form.Label>
                             <FloatingLabel controlId="floatingInputGrid" label="Escribe su referencia">
-                                <Form.Control 
-                                    type="text" 
-                                    placeholder="" 
-                                    {...register("referencia", { required: true })} 
+                                <Form.Control
+                                    type="text"
+                                    placeholder=""
+                                    {...register("referencia", { required: true })}
                                 />
                             </FloatingLabel>
                             <Form.Text className="text-muted">
