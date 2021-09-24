@@ -9,7 +9,7 @@ export default function Notification({}) {
   useEffect(() => {
     getAllMeNotification().then(res=>    setNotification(res))
   }, [])
-  console.log(notification)
+  console.log({notification},"------------sdad")
   return (
     <>
       <Head>
@@ -22,11 +22,7 @@ export default function Notification({}) {
         <h1 className="title">
           Notificaciones recientes
         </h1>
-
-{/*         <p className="description">
-          Get started by editing{' '}
-        </p> */}
-        
+      
         <CardList data={notification} />
     </>
   )

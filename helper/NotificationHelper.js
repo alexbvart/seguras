@@ -12,7 +12,7 @@
 
 export const getAllNotificationtHelper = async ({ data }) => {
     const res = data.map((alert)=>{
-        return getAlertHelperById({data:alert})
+        return getNotificationByIdHelper({data:alert})
     })
     return res
 }

@@ -19,9 +19,9 @@ const Login = () => {
             await localStorage.setItem("@usuario", JSON.stringify(res.usuario))
             let role = res.usuario.roles[0]
             if (role.nombre === "user-t2")
-                router.push("/monitor")
+                router.push("/alert")
             if (role.nombre === "user-ii")
-                router.push("/notification")
+                router.push("/notification/institution")
             if (role.nombre === "admin")
                 router.push("/")
         } else {

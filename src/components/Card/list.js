@@ -48,7 +48,7 @@ const CardList = ({ data }) => {
                             src={`${redirectionurl}/${card.alerta_id}`}
                             title={card.titulo   || `${card.usuario?.nombre} ${card.usuario?.apellido_paterno} ${card.usuario?.apellido_materno}` }
                         >
-                            {card.usuario.direccion && <>
+                            {card?.usuario?.direccion && <>
                                 Reporto un indicente cerca de {card.usuario.direccion.direccion},  {card.usuario.direccion.distrito}
                                 <br/>  {hacetiempo(card.created) }
                             </> }
