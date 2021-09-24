@@ -22,6 +22,6 @@ export const getAllMeNotification = async() =>{
 
 export const getNotificationById = async({id}) =>{
     const res = await getById({ src: "notificacion", id:id})
-    const resComplet = getNotificationByIdHelper({ "data": res.data })
-    return resComplet
+    /* const resComplet = getNotificationByIdHelper({ "data": res.data.data }) */
+    return res.data.data
 }

@@ -1,7 +1,8 @@
 import Head from 'next/head'
-import CardList from '@components/Card/list'
+
 import { getAllNotification } from '@service/NotificationServices'
 import { useEffect, useState } from 'react'
+import CardListNotification from '@components/Card/listNotification'
 
 export default function Notification({}) {
 
@@ -27,7 +28,7 @@ export default function Notification({}) {
           Get started by editing{' '}
         </p> */}
         
-        <CardList data={notification} />
+        <CardListNotification data={notification} />
     </>
   )
 }

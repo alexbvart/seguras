@@ -1,7 +1,7 @@
 import Head from 'next/head'
-import CardList from '@components/Card/list'
 import { getAllMeNotification } from '@service/NotificationServices'
 import { useEffect, useState } from 'react'
+import CardListNotification from '@components/Card/listNotification'
 
 export default function Notification({}) {
 
@@ -9,7 +9,6 @@ export default function Notification({}) {
   useEffect(() => {
     getAllMeNotification().then(res=>    setNotification(res))
   }, [])
-  console.log({notification},"------------sdad")
   return (
     <>
       <Head>
@@ -23,7 +22,7 @@ export default function Notification({}) {
           Notificaciones recientes
         </h1>
       
-        <CardList data={notification} />
+        <CardListNotification data={notification} />
     </>
   )
 }

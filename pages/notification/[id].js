@@ -1,23 +1,48 @@
+import Multimedia from '@components/Multimedia';
 import MyMap from '@components/MyMap';
+import dateToSpanish from '@module/dateToSpanish';
+import { getAlertById } from '@service/AlertServices';
+import { getNotificationById } from '@service/NotificationServices';
+import { getAllMePolice } from '@service/PoliceServices';
+import hacetiempo from '@util/hacetiempo';
 import post from 'module/post';
 
 import Head from 'next/head';
-import React from 'react';
-import { Container, Row, Col, Form, FloatingLabel, Button } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Container, Row, Col, Form, FloatingLabel, Button, Carousel } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image'
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
-const notification = ({ id, report,notification,police }) => {
+const notification = ({ id}) => {
+    const [index, setIndex] = useState(0);
+
+    const [notification, setNotification] = useState({})
+    const [police, setPolice] = useState([])
+    const colaborador = notification? `${notification?.colaborador?.persona?.nombre} ${notification?.colaborador?.persona?.apellido_paterno} ${notification?.colaborador?.persona?.apellido_materno}`: ""
+    const fullname = `${notification.alerta?.usuario?.nombre} ${notification.alerta?.usuario?.apellido_paterno} ${notification.alerta?.usuario?.apellido_materno}`
+    const fulldirection = `${notification.alerta?.usuario?.direccion?.direccion}, ${notification.alerta?.usuario?.direccion?.distrito},  ${notification.alerta?.usuario?.direccion?.provincia}`
+    
+
+    const handleSelect = (selectedIndex, e) => {
+        setIndex(selectedIndex);
+    };
+    useEffect(() => {
+        getNotificationById({ id }).then(res => setNotification(res))
+        getAllMePolice().then(res=>setPolice(res.data.data))
+    }, [])
 
     const { control, handleSubmit, register, formState: { errors } } = useForm();
-    const onSubmit = async data =>{
+
+    const onSubmit = async (data) =>{
+        console.log("aaa")
         const sendData ={
-            "notificacion_id": id,
-            "efectivo_id": data.police,
-            "estado": "atendido"
+            "notificacion_id": parseInt(notification?.notificacion_id),
+            "efectivo_id": parseInt(data.efectivo_id),
         }
-        const res = await post({src:"asignacion", data:sendData})
-        if(res.status===201){
+        console.log({sendData})
+        
+        const res = await post({src:"asignacion", data:sendData}) 
+        if(res.status===201||res.status===200){
             swal("Datos registrados", "La asignación fue realizada", "success", {
                 button: "De acuerdo",
             });
@@ -27,6 +52,7 @@ const notification = ({ id, report,notification,police }) => {
             });
         }
     } 
+    
     return (
         <>
             <Head>
@@ -40,23 +66,50 @@ const notification = ({ id, report,notification,police }) => {
             </h1>
             <br />
             <Container >
-                <Row xs={1} sm={2}>
+                <Row xs={1} sm={1}>
                     <Col>
                         <article>
+                            <h2>{notification?.titulo}</h2>
+                            <p>{notification?.descripcion}</p>
+                            <h2>Denunciado por:</h2>
+                            <p>{fullname}</p>
+                            <h2>Cerca a:</h2>
+                            <p>{fulldirection}</p>
+                            <hr />
                             <h2>Registrada por:</h2>
-                            <p>{report.user.nombre}</p>
-{/*                             <h2>Fecha y hora:</h2>
-                            <p>{report.user}</p> */}
-                            <h2>Ubicación:</h2>
-                            <p>{report.location}</p>
+                            <p>{colaborador}</p>
+                            <h2>Notificada a:</h2>
+                            <p>{notification?.institucion?.nombre}</p>
+                            <h2>Nivel de gravedad:</h2>
+                            <p>{notification?.nivel}</p>
+                            <h2>Fecha y hora:</h2>
+                            <p>{hacetiempo(notification?.alerta?.created)}, {dateToSpanish(notification?.alerta?.created)}</p>
                         </article>
-                    </Col>
-                    <Col>
-                        <Image src={report.multimedia} fluid />
                     </Col>
                 </Row>
                 <Row>
-                    <MyMap  title={report.user.nombre} />
+                    {notification?.alerta?.multimedias &&
+                        <Col>
+                            <Carousel activeIndex={index} onSelect={handleSelect}>
+                                {notification?.alerta?.multimedias.map((m, index) => (
+                                    <Carousel.Item>
+                                        <Multimedia
+                                            src={m.url}
+                                            type={m.tipo}
+                                        />
+                                        <Carousel.Caption>
+                                            <p>Evidencia {index + 1}</p>
+                                        </Carousel.Caption>
+                                    </Carousel.Item>
+                                ))}
+                            </Carousel>
+                        </Col>}
+                    <Col>
+                        <MyMap  
+                            title={"Ubicación"} 
+                            latitude={notification?.alerta?.latitude} 
+                            longitude={notification?.alerta?.longitude} />
+                    </Col>
                 </Row>
             </Container>
             <br />
@@ -65,32 +118,13 @@ const notification = ({ id, report,notification,police }) => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Row className="" xs={1} md={2}>
                         <Form.Group className="mb-3 col-md-6" controlId="formBasicEmail" as={Col}>
-                            <Form.Label
-                                {...register("description", { required: true })}
-                            >Descripción de lo ocurrido</Form.Label>
-                            <FloatingLabel controlId="floatingInputGrid" label="Escribe una descripción">
-                                <Form.Control 
-                                    type="text" 
-                                    placeholder="Escribe una descripción" 
-                                    {...register("description")} 
-                                    defaultValue={`${report.user.nombre} reporto una incidencia en ${report.location}`}
-                                />
-                            </FloatingLabel>
-                            <Form.Text className="text-muted">
-                                {!errors.description && <>Añade un resumen de la alerta.</>}
-                                {errors.description?.type === 'required' && <span className="text-danger">Añade un resumen de la alerta.</span>}
-                                {errors.description?.type === 'maxLength' && <span className="text-danger">El resumen debe contener mas de 10 caracteres.</span>}
-                            </Form.Text>
-                        </Form.Group>
-
-                        <Form.Group className="mb-3 col-md-6" controlId="formBasicEmail" as={Col}>
                             <Form.Label>Notificar a un oficial de la institución </Form.Label>
                             <FloatingLabel controlId="floatingSelectGrid" label="Abre y seleciona un oficial">
                                 <Form.Select aria-label="Oficiales"
-                                    {...register("police", { required: true })}>
+                                    {...register("efectivo_id", { required: true })}>
                                     {
-                                        police&&police.map(({id,fullname})=>(
-                                            <option value={id}>{fullname}</option>
+                                        police&&police.map(({efectivo_id,persona})=>(
+                                            <option key={efectivo_id} value={efectivo_id}>{persona.nombre} {persona.apellido_paterno} {persona.apellido_materno}</option>
                                         ))
                                     }
                                 </Form.Select>
@@ -102,6 +136,7 @@ const notification = ({ id, report,notification,police }) => {
                     </Button>
                 </form>
             </Container>
+        
         </>
     );
 }
@@ -112,22 +147,10 @@ export async function getServerSideProps(context) {
     /* const { query } = params; */
     const SERVER_HOST = process.env.NEXT_PUBLIC_API_PORT
 
-    const notification = await fetch(`${SERVER_HOST}/notification/${id}`)
-        .then(res => res.json())
-
-    const {alertaId} = notification
-    const report = await fetch(`${SERVER_HOST}/reports/${alertaId}`)
-        .then(res => res.json())
-
-    const police = await fetch(`${SERVER_HOST}/efectivo`)
-        .then(res => res.json())
 
     return {
         props: {
-            report,
-            notification,
             id,
-            police
         }
     };
 }

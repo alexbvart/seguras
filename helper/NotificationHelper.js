@@ -10,6 +10,10 @@
 }
  */
 
+import { getAlertById } from "@service/AlertServices"
+import { getCollaboratorById } from "@service/CollaboratorServices"
+import { getInstitutionById } from "@service/InstitutionServices"
+
 export const getAllNotificationtHelper = async ({ data }) => {
     const res = data.map((alert)=>{
         return getNotificationByIdHelper({data:alert})
@@ -18,16 +22,18 @@ export const getAllNotificationtHelper = async ({ data }) => {
 }
 
 export const getNotificationByIdHelper = async ({ data }) => {
-    const alert = data?.alert_id && getAlertById({ id: data.alert_id })
-/*     const institucion = data?.institucion_id && getInstitucionById({ id: data.institucion_id })
-    const colaborador = data?.colaborador_id && getColaboradorById({ id: data.colaborador_id }) */
+
+    console.log("getNotificationByIdHelper",{data})
+    const alert = data?.alert_id && await getAlertById({ id: data.alert_id })
+    const institucion = data?.institucion_id && getInstitutionById({ id: data.institucion_id })
+    const colaborador = data?.colaborador_id && getCollaboratorById({ id: data.colaborador_id })
     const resFormat =     {
         "titulo":data.titulo,
         "alerta": alert,
-        "institucion_id":institucion_id,
+        "institucion_id":institucion,
         "nivel": data.nivel,
         "descripcion":data.descripcion,
-        "colaborador_id":colaborador_id
+        "colaborador_id":colaborador
     }
     return resFormat;
 }

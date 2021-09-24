@@ -1,5 +1,6 @@
 import { createCollaboratorHelper } from "@helper/CollaboratorHelper"
 import getAll from "@module/getAll";
+import getById from "@module/getById";
 import  post  from '@module/post';
 
 /* https://github.com/User0608/mujeresapi/blob/master/docs/PERSONA.md */
@@ -16,4 +17,10 @@ export const getMeCollaborator = async () =>{
 export const getAllCollaborator = async () =>{
     const res = await getAll({src:"colaborador"})
     return res.data
+}
+
+export const getCollaboratorById = async({id}) =>{
+    const res = await getById({ src: "colaborador", id:id})
+    /* const resComplet = await getInstitutionByIdHelper({ "data": res.data }) */
+    return res.data.data
 }

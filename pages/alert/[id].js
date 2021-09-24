@@ -25,6 +25,7 @@ const alertbyid = ({ id }) => {
 
     const fullname = `${alert?.usuario?.nombre} ${alert?.usuario?.apellido_paterno} ${alert?.usuario?.apellido_materno}`
     const fulldirection = `${alert?.usuario?.direccion?.direccion}, ${alert?.usuario?.direccion?.distrito},  ${alert?.usuario?.direccion?.provincia}`
+    
     const handleSelect = (selectedIndex, e) => {
         setIndex(selectedIndex);
     };
@@ -97,7 +98,6 @@ const alertbyid = ({ id }) => {
                                             type={m.tipo}
                                         />
                                         <Carousel.Caption>
-                                            {/* <h3>First slide label</h3> */}
                                             <p>Evidencia {`${index + 1}`}</p>
                                         </Carousel.Caption>
                                     </Carousel.Item>

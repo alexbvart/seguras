@@ -9,14 +9,20 @@ import { createPolice } from '@service/PoliceServices';
 
 
 const Police = () => {
-    const { control, handleSubmit, register, formState: { errors } } = useForm();
+    const { control, handleSubmit, setValue,register, formState: { errors } } = useForm();
     const [me, setMe] = useState([])
-
+    setValue('institucion_id', me?.institucion_id); 
 
     useEffect(() => {
         getMeInstitution().then(res => setMe(res.data))
     }, [])
-
+    console.log(errors)
+    const onError = (errors, e) => {
+        console.log(errors)
+        swal("Algo salio mal", "Algunas preguntas no han sido respondidas", "warning", {
+            button: "De acuerdo",
+        });
+    }
     const onSubmit = async (data,e) => {
         const res = await createPolice({data})
         if (res.status === 200) {
@@ -49,12 +55,7 @@ const Police = () => {
                 <h2>Introduzca los datos del oficial</h2><br />
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Row className="" xs={1} sm={3}>
-                                <Form.Control
-                                    type="hidden"
-                                    placeholder=""
-                                    defaultValue={me.institucion_id}
-                                    {...register("institucion_id", { required: true })}
-                                />
+                    <input type="hidden"  {...register("institucion_id", { required: true })} />
                         <Form.Group className="mb-3 " controlId="formBasicEmail" as={Col}>
                             <Form.Label>Nombre</Form.Label>
                             <FloatingLabel controlId="floatingInputGrid" label="Escribe su nombre">
