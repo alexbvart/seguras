@@ -24,11 +24,11 @@ const HeaderControl = () => {
                     </Nav.Link>
                 </Nav.Item> */}
                 <NavDropdown title="Personal de monitoreo" id="nav-dropdown">
-                    <NavDropdown.Item eventKey="4.1">
+                    {/* <NavDropdown.Item eventKey="4.1">
                         <Link href="/monitor/new">
                             <a>Registrar</a>
                         </Link>
-                    </NavDropdown.Item>
+                    </NavDropdown.Item> */}
                     <NavDropdown.Item eventKey="4.2"><Link href="/monitor">
                         <a>Listar</a>
                     </Link></NavDropdown.Item>

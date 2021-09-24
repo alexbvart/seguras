@@ -58,11 +58,11 @@ const HeaderAdmin = () => {
                     <NavDropdown.Item eventKey="4.4">Separated link</NavDropdown.Item>*/}
                 </NavDropdown>
                 <NavDropdown title="Efectivos" id="nav-dropdown">
-                    <NavDropdown.Item eventKey="4.1">
+                    {/* <NavDropdown.Item eventKey="4.1">
                         <Link href="/police/new">
                             <a>Registrar</a>
                         </Link>
-                    </NavDropdown.Item>
+                    </NavDropdown.Item> */}
                     <NavDropdown.Item eventKey="4.2"><Link href="/police/">
                         <a>Listar</a>
                     </Link></NavDropdown.Item>

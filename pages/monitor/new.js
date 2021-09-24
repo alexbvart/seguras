@@ -219,7 +219,7 @@ const Monitor = () => {
                                         <Form.Control
                                             type="password"
                                             placeholder=""
-                                            {...register("password", { required: true , minLength:108})}
+                                            {...register("password", { required: true , minLength:8})}
                                         />
                                     </FloatingLabel>
                                     <Form.Text className="text-muted">
